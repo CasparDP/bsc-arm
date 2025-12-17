@@ -84,7 +84,6 @@ env/
 # *.png
 # *.jpg
 *.pdf
-*.html
 
 !/theme/RSM_Colour_guide_Offset_and_digital_OBT_2021_DEF.pdf
 /.github/*
@@ -93,3 +92,4 @@ env/
 # Note: docs/ is intentionally NOT ignored as it's needed for GitHub Pages deployment
 
 **/*.quarto_ipynb
+test_play.R

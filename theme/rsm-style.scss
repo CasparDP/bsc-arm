@@ -1,0 +1,545 @@
+/*-- scss:defaults --*/
+
+// RSM Primary Colors
+$rsm-blue: #171c54;
+$rsm-light-blue: #2871ad;
+$rsm-blue-75: #51557f;
+$rsm-blue-50: #5e95c2;
+$rsm-blue-25: #93b8d6;
+$rsm-blue-10: #c9dbea;
+$rsm-blue-5: #e9f1f7; // Fixed hex code
+
+// RSM Secondary Colors
+$rsm-magenta: #d73181;
+$rsm-orange: #ee7656;
+$rsm-ocher: #f7ab64;
+$rsm-olive: #418b73;
+$rsm-petrol: #438596;
+$rsm-red: #e30613;
+
+// RSM Grays
+$rsm-dark-grey: #616363;
+$rsm-mid-grey: #898b8c;
+$rsm-light-grey: #c7c8ca;
+$rsm-black: #000000;
+
+// Additional RSM palette colors
+$rsm-grey-1: #8b8da9;
+$rsm-grey-2: #c5c6d4;
+$rsm-grey-3: #e7e8ee;
+
+// Variables for theme
+$jet: $rsm-black;
+$accent: $rsm-blue-25; // Light blue for links and accents
+$accent2: $rsm-red; // Red for alerts and highlights
+$right-arrow: "\2192"; // Unicode character for right arrow
+
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap");
+$font-family-sans-serif: "Open Sans", "Helvetica Neue", Helvetica, Arial,
+  sans-serif !default;
+$presentation-font-size-root: 28px;
+
+$presentation-heading-font: "Open Sans", sans-serif !default;
+$presentation-heading-color: $rsm-blue !default;
+$presentation-heading-font-weight: 400;
+
+// colors
+$body-color: $rsm-dark-grey !default;
+$link-color: $rsm-light-blue !default;
+$selection-bg: $rsm-olive !default;
+
+// Additional variables for specific components
+$code-block-bg: $rsm-blue-5;
+$code-color: $rsm-petrol;
+
+/*-- scss:rules --*/
+
+.reveal a {
+  line-height: 1.5em;
+  color: $rsm-light-blue;
+
+  &:hover {
+    color: $rsm-blue;
+    text-decoration: underline;
+  }
+}
+
+.reveal p {
+  font-weight: 300;
+  margin-top: 1.25em;
+}
+
+// title and headings
+
+#title-slide {
+  text-align: left;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba($rsm-blue-10, 0.4),
+    rgba(white, 0.1)
+  );
+  border-left: 5px solid $rsm-blue;
+  padding-left: 1.5em;
+  padding-bottom: 2em;
+
+  .title {
+    color: $rsm-blue;
+    font-size: 1.6em;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+  }
+
+  .subtitle {
+    color: $rsm-magenta;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-style: italic;
+    color: $rsm-grey-1;
+  }
+
+  .author,
+  .quarto-title-author-name {
+    color: $rsm-blue-75;
+    font-weight: 500;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+
+  .date {
+    color: $rsm-grey-1;
+    font-style: italic;
+  }
+}
+
+// Logo positioning
+.reveal .slide-logo {
+  max-height: 3rem !important;
+  right: 1em !important;
+}
+
+// Footer styling
+.reveal .footer {
+  color: $rsm-mid-grey;
+  font-size: 0.7em;
+  font-style: italic;
+  border-top: 1px solid $rsm-blue-10;
+  padding-top: 0.5em;
+}
+
+// Headings
+.reveal h1 {
+  color: $rsm-blue;
+  font-weight: 600;
+  border-bottom: 2px solid $rsm-blue-10;
+  padding-bottom: 0.2em;
+}
+
+.reveal h2 {
+  font-weight: 500;
+  font-size: 1.4em;
+  color: $rsm-blue;
+  border-left: 4px solid $rsm-blue-25;
+  padding-left: 0.5em;
+}
+
+.reveal h3 {
+  color: $rsm-grey-1;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2em;
+  border-bottom: 1px solid $rsm-blue-10;
+  display: inline-block;
+}
+
+.reveal h4 {
+  color: $rsm-ocher;
+  font-weight: 500;
+  margin-top: 1.25em;
+}
+
+.reveal h5 {
+  color: $rsm-blue;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.reveal h6 {
+  color: $rsm-light-blue;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+// alerts etc.
+.alert {
+  color: $rsm-red;
+}
+
+.fg {
+  color: var(--col, $jet);
+}
+
+.bg {
+  background-color: var(--col, #fff);
+  padding: 0.1em;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+// Callouts styling
+.callout {
+  border-radius: 5px;
+  border-left-width: 5px !important;
+
+  &.callout-note {
+    border-left-color: $rsm-light-blue !important;
+
+    .callout-header {
+      color: $rsm-light-blue !important;
+    }
+  }
+
+  &.callout-important {
+    border-left-color: $rsm-magenta !important;
+
+    .callout-header {
+      color: $rsm-magenta !important;
+    }
+  }
+
+  &.callout-caution {
+    border-left-color: $rsm-orange !important;
+
+    .callout-header {
+      color: $rsm-orange !important;
+    }
+  }
+}
+
+// Code blocks
+.reveal pre {
+  background-color: $rsm-blue-5;
+  border-left: 4px solid $rsm-blue-25;
+  padding: 0.5em 1em;
+
+  code {
+    color: $rsm-blue-75;
+  }
+}
+
+// Inline code
+.reveal code {
+  color: $rsm-petrol;
+  background-color: rgba($rsm-blue-10, 0.3);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+// Table styling
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    background-color: $rsm-blue-10;
+    color: $rsm-blue;
+    border-bottom: 2px solid $rsm-blue-25;
+    font-weight: 600;
+  }
+
+  td {
+    border-bottom: 1px solid $rsm-blue-5;
+  }
+
+  tr:nth-child(even) {
+    background-color: rgba($rsm-blue-5, 0.3);
+  }
+}
+
+// lists
+
+// Unordered lists
+.reveal ul {
+  font-weight: 300;
+  padding-left: 16px;
+
+  li::marker {
+    color: $rsm-blue-25;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+}
+
+.reveal ul ul {
+  list-style: none;
+
+  li:before {
+    content: $right-arrow;
+    color: $rsm-ocher;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    margin-right: 0.5em;
+  }
+}
+
+// Ordered lists
+.reveal ol {
+  font-weight: 300;
+  padding-left: 16px;
+
+  li::marker {
+    color: $rsm-blue-25;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+}
+
+// Move "hamburger" menu button to top right
+.reveal .slide-menu-button {
+  position: fixed;
+  top: 6px;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.reveal .slide-menu-button > * {
+  pointer-events: auto;
+}
+
+// Same for chalkboard buttons (with an offset)
+.reveal .slide-chalkboard-buttons {
+  position: fixed;
+  top: 12px;
+  right: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.reveal .slide-chalkboard-buttons > * {
+  pointer-events: auto;
+}
+
+// Beamer-style button link environment
+.button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: $rsm-light-blue;
+  border: 1px solid $rsm-light-blue;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: $rsm-blue;
+  border-color: $rsm-blue;
+}
+
+.button::before {
+  content: "▶";
+  margin-right: 5px;
+}
+
+// Special catch for etable environment
+.etable {
+  width: 100%;
+  height: calc(100% - 3em);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.etable img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: calc(100% - 3em);
+  object-fit: contain;
+}
+
+// Progress bars
+.progress {
+  background-color: $rsm-blue-5;
+
+  .progress-bar {
+    background-color: $rsm-blue-25;
+    font-size: 8px;
+    line-height: 8px;
+  }
+}
+
+// Tab styling
+.tabcontent {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  border: none;
+  border-top: none;
+}
+
+// Panel tabset styling
+.panel-tabset .nav-tabs {
+  border-bottom: 2px solid $rsm-blue-10;
+
+  .nav-link {
+    color: $rsm-mid-grey;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+
+    &.active {
+      color: $rsm-blue;
+      border-bottom: 2px solid $rsm-blue;
+    }
+
+    &:hover:not(.active) {
+      color: $rsm-blue-75;
+      border-bottom: 2px solid $rsm-blue-10;
+    }
+  }
+}
+
+// Figures
+.reveal .figure {
+  margin: 1em 0;
+
+  .figure-caption {
+    color: $rsm-grey-1;
+    font-style: italic;
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 0.5em;
+  }
+}
+
+// Citations and footnotes
+.reveal .footnote,
+.reveal .citation {
+  font-size: 0.7em;
+  color: $rsm-mid-grey;
+  margin-top: 2em;
+}
+
+// Block quotes
+.reveal blockquote {
+  border-left: 5px solid $rsm-blue-10;
+  background-color: rgba($rsm-blue-5, 0.3);
+  padding: 0.5em 1em;
+  font-style: italic;
+  color: $rsm-grey-1;
+}
+
+// Aside styling
+.reveal aside,
+.reveal .aside {
+  font-size: 0.8em;
+  color: $rsm-grey-1;
+  font-style: italic;
+  border-top: 1px solid $rsm-blue-5;
+  margin-top: 1em;
+  padding-top: 0.5em;
+}
+
+// Slide transitions
+.reveal {
+  transition: background 0.8s ease-in-out;
+}
+
+// Section headers styling
+.reveal .r-fit-text {
+  color: $rsm-blue;
+  font-weight: 600;
+  text-align: center;
+}
+// Image controls - add these to your scss file
+
+// Default behavior for images
+.reveal img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  margin: auto;
+  display: block;
+}
+
+// Size variants
+.reveal .img-small {
+  max-height: 30vh;
+}
+
+.reveal .img-medium {
+  max-height: 50vh;
+}
+
+.reveal .img-large {
+  max-height: 70vh;
+}
+
+.reveal .img-full {
+  max-height: 85vh;
+}
+
+// Fit modes
+.reveal .img-contain {
+  object-fit: contain;
+}
+
+.reveal .img-cover {
+  object-fit: cover;
+}
+
+.reveal .img-fill {
+  width: 100%;
+  height: auto;
+}
+
+// Float options
+.reveal .img-float-left {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+  max-width: 45%;
+}
+
+.reveal .img-float-right {
+  float: right;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+  max-width: 45%;
+}

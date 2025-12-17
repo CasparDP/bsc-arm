@@ -1,0 +1,93 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+.Rapp.history
+*_cache/
+*_files/
+
+# Quarto
+/.quarto/
+_site/
+.quarto_cache/
+*_cache/
+*.html.json
+*.tex.json
+
+# Temporary files
+*.tmp
+*.log
+*.aux
+*.out
+*~
+.DS_Store
+Thumbs.db
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# RStudio
+.Rproj.user/
+*.Rproj
+.RData
+.Rhistory
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Python (if using reticulate)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+.venv
+
+# LaTeX intermediate files (from PDF rendering)
+*.aux
+*.bbl
+*.blg
+*.fls
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.synctex.gz
+
+# Plots and figures (uncomment if you don't want to track them)
+# *.png
+# *.jpg
+*.pdf
+*.html
+
+!/theme/RSM_Colour_guide_Offset_and_digital_OBT_2021_DEF.pdf
+/.github/*
+
+# Keep docs/ folder for GitHub Pages
+# Note: docs/ is intentionally NOT ignored as it's needed for GitHub Pages deployment

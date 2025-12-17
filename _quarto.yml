@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Advanced Research Methods"
+  site-url: https://CasparDP/bsc-arm
+  navbar:
+    background: "#0c1019"
+    foreground: "#ff9e45"
+    left:
+      - text: "Lecture Slides"
+        href: Advance research methods.html
+      - text: "Lecture Notes"
+        href: lecture_notes.html
+
+format:
+  html:
+    theme:
+      - theme/caspar_slide.scss
+    css: theme/rsm.css
+    toc: false
+    embed-resources: false
+  revealjs:
+    theme: theme/caspar_slide.scss
+    code-tools: true
+    code-overflow: wrap
+    auto-stretch: true
+    smaller: false
+    transition: "slide"
+    slideNumber: true
+    embed-resources: true
+    echo: true

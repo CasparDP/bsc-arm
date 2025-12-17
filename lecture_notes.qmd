@@ -1,0 +1,65 @@
+# Talking Points for Advanced Research Methods Lecture
+
+## Introduction (Slides 1-7)
+- Research is exciting because the world is our laboratory and people are our subjects
+- Our goal: Uncover the causal effect of an intervention (Average Treatment Effect)
+- Key challenge: Correlation ≠ Causation
+  - **Question for audience**: "Can anyone give an example of two things that are correlated but not causally related?"
+- Research follows a systematic process: theory → hypothesis → measurement → testing
+
+## Hypothesis Development (Slides 8-14)
+- Hypotheses are testable predictions derived from theory
+- We test against a null hypothesis (H₀) which states no effect exists
+- Statistical significance: how far sample evidence deviates from what we'd expect under H₀
+  - **Question for audience**: "When might a statistically significant result still not be practically meaningful?"
+- Need to distinguish between statistical and practical significance
+
+## The "Becksperiment" (Slides 15-25)
+- Simple group comparison showed beer drinkers performed better academically
+- But this wasn't causal - selection bias was present
+- Beer drinkers also had more talent/better education (unobservable factors)
+- Correlations between treatment and outcome don't tell the whole story
+  - **Question for audience**: "What other variables might affect both someone's decision to drink beer and their academic performance?"
+- When we randomized treatment, the effect disappeared
+  - **Interactive moment**: "Before I show you the randomized results, what do you predict we'll find?"
+
+## The Gold Standard: Experiments (Slides 26-33)
+- Randomization eliminates selection bias
+- Makes groups similar on observable AND unobservable dimensions
+- The only difference becomes the treatment itself
+- Types: field experiments, A/B testing, lab experiments
+  - **Question for audience**: "What are some limitations of laboratory experiments in accounting research?"
+- Trade-off between internal validity (accuracy) and external validity (generalizability)
+  - **Interactive moment**: "If you had to choose between high internal validity or high external validity for your BSc project, which would you prioritize and why?"
+
+## Difference-in-Differences (DiD) (Slides 34-42)
+- Alternative when randomization isn't possible
+- Compares changes in treatment vs. control groups over time
+- Key assumption: parallel trends (groups would have evolved similarly without treatment)
+  - **Question for audience**: "What might violate the parallel trends assumption in a study of how IFRS adoption affects earnings quality?"
+- Case study: Cannabis access and academic performance
+  - Natural experiment using nationality-based discrimination in access
+  - Restricting cannabis access improved academic performance
+  - **Interactive moment**: "How would you explain these results to someone with no statistical background?"
+
+## DiD Implementation (Slides 43-48)
+- DiD mechanics: (Treatment_After - Treatment_Before) - (Control_After - Control_Before)
+- Can be implemented through regression with interaction term
+- Event study graphs help visualize treatment effects over time
+- Pre-treatment periods help evaluate parallel trends assumption
+  - **Question for audience**: "Looking at this event study graph, how would you interpret these coefficients?"
+
+## Takeaways (Slides 49-52)
+- Selection bias undermines causal inference
+- Random assignment is the gold standard but isn't always possible
+- DiD offers an alternative by controlling for time-invariant confounders
+- Careful research design is crucial regardless of methodology
+  - **Final question**: "What research design considerations will you apply to your BSc project?"
+
+# Key Points to Emphasize
+
+1. Always distinguish between descriptive relationships and causal effects
+2. Be aware of selection bias and other threats to validity
+3. The method should match the research question, not vice versa
+4. Always consider alternative explanations for your findings
+5. Good research design anticipates and addresses threats to validity

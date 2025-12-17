@@ -1,0 +1,432 @@
+/*-- scss:defaults --*/
+
+/* Import fonts */
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap");
+
+/* Base colors from RSM palette and website dark theme */
+$background-dark: #0c1019;
+$background-medium: #141824;
+$text-color: #e7e6dc;
+$heading-color: #ff9e45;
+$accent-color: #93b8d6;
+$accent2-color: #d73181; /* RSM Magenta */
+$link-color: #ff9e45;
+$link-hover-color: #ffb878;
+$code-color: #ff9e45;
+$selection-color: #418b73; /* RSM Olive */
+$right-arrow: "\2192";
+
+/* Typography */
+$font-family-sans-serif: "Work Sans", sans-serif;
+$font-family-monospace: "Space Mono", monospace;
+$presentation-font-size-root: 28px;
+$presentation-heading-font: "Space Mono", monospace;
+$presentation-heading-color: $heading-color;
+$presentation-heading-font-weight: 600;
+$body-color: $text-color;
+$link-color: $link-color;
+$selection-bg: $selection-color;
+
+/*-- scss:rules --*/
+
+/* Base styles */
+body {
+  background-color: $background-dark !important;
+  background-image: linear-gradient(
+    to bottom,
+    $background-dark 0%,
+    $background-medium 100%
+  ) !important;
+  background-attachment: fixed !important;
+}
+
+.reveal {
+  font-family: $font-family-sans-serif;
+  color: $text-color;
+}
+
+/* Add subtle scanline effect */
+.reveal::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* Links */
+.reveal a {
+  color: $link-color;
+  text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  line-height: 1.5em;
+}
+
+.reveal a:hover {
+  color: $link-hover-color;
+  text-shadow: 0 0 8px rgba(255, 158, 69, 0.5);
+}
+
+/* Text */
+.reveal p {
+  font-weight: 300;
+  margin-top: 1.25em;
+}
+
+/* Headings */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: $font-family-monospace;
+  color: $heading-color;
+  letter-spacing: 0.05em;
+}
+
+.reveal h1 {
+  font-size: 2.5em;
+  border-bottom: 2px solid rgba(255, 158, 69, 0.4);
+  padding-bottom: 0.5rem;
+}
+
+.reveal h2 {
+  font-weight: 700;
+  font-size: 1.8em;
+}
+
+.reveal h3 {
+  color: $accent-color;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4em;
+}
+
+.reveal h4 {
+  color: $accent2-color;
+  font-weight: 400;
+  font-size: 1.2em;
+  margin-top: 1.25em;
+}
+
+/* Title slide */
+#title-slide {
+  text-align: left;
+}
+
+#title-slide .title {
+  color: $heading-color;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.2;
+  border-bottom: 2px solid rgba(255, 158, 69, 0.4);
+  padding-bottom: 0.5rem;
+}
+
+#title-slide .subtitle {
+  color: $accent-color;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+#title-slide .author,
+#title-slide .quarto-title-author-name {
+  color: $text-color;
+  font-size: 1.2em;
+}
+
+#title-slide .institute,
+#title-slide .quarto-title-affiliation,
+#title-slide .quarto-title-author-email {
+  font-style: italic;
+  color: $text-color;
+  opacity: 0.8;
+}
+
+/* Lists */
+.reveal ul {
+  font-weight: 300;
+  padding-left: 16px;
+}
+
+.reveal ul li::marker {
+  color: rgba(255, 158, 69, 0.7);
+}
+
+.reveal ul ul {
+  list-style: none;
+}
+
+.reveal ul ul li:before {
+  content: $right-arrow;
+  color: rgba(255, 158, 69, 0.6);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  margin-right: 0.5em;
+}
+
+.reveal ol {
+  font-weight: 300;
+  padding-left: 16px;
+}
+
+.reveal ol li::marker {
+  color: $link-color;
+}
+
+/* Code */
+.reveal pre {
+  background-color: rgba(12, 16, 25, 0.7);
+  border: 1px solid rgba(255, 158, 69, 0.3);
+  color: $code-color;
+  font-family: $font-family-monospace;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.reveal code {
+  color: $code-color;
+  background-color: rgba(12, 16, 25, 0.5);
+  font-family: $font-family-monospace;
+}
+
+/* Tables */
+.reveal table {
+  color: $text-color;
+  font-family: $font-family-monospace;
+  font-size: 0.9em;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.reveal table th {
+  background-color: rgba(12, 16, 25, 0.8);
+  color: $heading-color;
+  font-weight: 700;
+  padding: 0.5em;
+  border-bottom: 2px solid rgba(255, 158, 69, 0.5);
+}
+
+.reveal table td {
+  padding: 0.5em;
+  border-top: 1px solid rgba(231, 230, 220, 0.1);
+}
+
+.reveal table tbody tr {
+  background-color: rgba(44, 51, 71, 0.5);
+}
+
+.reveal table tbody tr:hover {
+  background-color: rgba(255, 158, 69, 0.1);
+}
+
+/* Cards and callouts */
+.reveal .card,
+.reveal .callout {
+  background-color: rgba(44, 51, 71, 0.7);
+  color: $text-color;
+  border: 1px solid rgba(255, 158, 69, 0.4);
+  border-radius: 0;
+  box-shadow: 0 0 15px rgba(255, 158, 69, 0.2);
+  margin: 1em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.reveal .card::before,
+.reveal .callout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: $heading-color;
+  opacity: 0.7;
+}
+
+.reveal .callout-note,
+.reveal .callout-tip {
+  border-left: 4px solid $accent-color;
+}
+
+.reveal .callout-important,
+.reveal .callout-warning {
+  border-left: 4px solid $accent2-color;
+}
+
+.reveal .callout-caution {
+  border-left: 4px solid #f7ab64; /* RSM Ocher */
+}
+
+/* Quotes */
+.reveal blockquote {
+  border-left: 4px solid $heading-color;
+  color: $text-color;
+  background-color: rgba(12, 16, 25, 0.5);
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  font-style: italic;
+}
+
+/* Images */
+.reveal img {
+  border: 1px solid rgba(255, 158, 69, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 0.5em 0;
+}
+
+/* Footer and aside */
+.reveal footer,
+.reveal .footer {
+  font-size: 0.7em;
+  color: rgba(231, 230, 220, 0.6);
+  position: fixed;
+  bottom: 0.5em;
+  left: 0.5em;
+}
+
+.reveal aside,
+.reveal .aside {
+  font-size: 0.8em;
+  color: rgba(231, 230, 220, 0.8);
+  font-style: italic;
+}
+
+/* Progress bar */
+.reveal .progress {
+  color: $heading-color;
+}
+
+/* Menu */
+.reveal .slide-menu-button,
+.reveal .slide-chalkboard-buttons {
+  position: fixed;
+  top: 6px;
+  right: 6px;
+  z-index: 30;
+  color: $text-color;
+}
+
+/* Figures and captions */
+.reveal figcaption {
+  font-size: 0.8em;
+  color: rgba(231, 230, 220, 0.8);
+  font-style: italic;
+  margin-top: 0.5em;
+}
+
+/* Special animation for title */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 158, 69, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 158, 69, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 158, 69, 0.5);
+  }
+}
+
+#title-slide .title {
+  animation: glow 4s infinite;
+}
+
+/* For etable environment */
+.etable {
+  width: 100%;
+  height: calc(100% - 3em);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.etable img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: calc(100% - 3em);
+  object-fit: contain;
+}
+
+/* Tab content styling - Preserving Bootstrap behavior */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid rgba(255, 158, 69, 0.3);
+}
+
+.nav-tabs .nav-item {
+  margin-bottom: -1px;
+}
+
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  color: $text-color;
+  background-color: rgba(44, 51, 71, 0.4);
+  padding: 0.5rem 1rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: rgba(255, 158, 69, 0.2);
+  border-color: rgba(255, 158, 69, 0.2);
+}
+
+.nav-tabs .nav-link.active {
+  color: $heading-color;
+  background-color: rgba(44, 51, 71, 0.8);
+  border-color: rgba(255, 158, 69, 0.3);
+  border-bottom-color: transparent;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.tabcontent {
+  background-color: rgba(44, 51, 71, 0.5);
+  border: 1px solid rgba(255, 158, 69, 0.3);
+  border-top: none;
+  padding: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+/* Panel tabset styling */
+.panel-tabset .nav-tabs {
+  border-bottom: 1px solid rgba(255, 158, 69, 0.3);
+}
+
+.panel-tabset .tab-content {
+  background-color: rgba(44, 51, 71, 0.5);
+  border: 1px solid rgba(255, 158, 69, 0.3);
+  border-top: none;
+  padding: 1rem;
+}
+
+.panel-tabset .tab-pane {
+  color: $text-color;
+}

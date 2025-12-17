@@ -1,0 +1,1627 @@
+---
+title: "Advanced research methods"
+subtitle: "Session 1"
+author:
+  - name: Caspar David Peter
+    orcid: 0000-0003-0020-1673
+    email: peter@rsm.nl
+    affiliations: "Rotterdam School of Management, Accounting Department"
+#date: "2025-3-11"
+bibliography: ["References/references.bib"]
+csl: References/journal-of-financial-economics.csl
+logo: "Pics/Rotterdam_School_of_Management,_Erasmus_University_Rotterdam_(RSM)_Logo.png"
+footer: "Advanced research methods"
+embed-resources: true
+echo: true
+callout-appearance: simple
+code-fold: false
+citations-hover: true
+#format: clean-revealjs
+fig-width: 7
+fig-height: 4
+mermaid-format: png
+menu: false
+slide-level: 2
+highlight-style: a11y-dark
+format: 
+  revealjs:
+    theme: theme/caspar_slide.scss
+   # touch: true
+    code-tools: true
+    code-overflow: wrap
+    auto-stretch: true
+    smaller: false
+    transition: "slide"
+    slideNumber: true
+    #center: true
+
+---
+
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, include = FALSE}
+# Library
+library(tidyverse)
+# OLS
+library(fixest)
+# For nicer event study graphs 
+library(ggfixest)
+# Optional for nicer html table 
+library(kableExtra)
+```
+
+
+
+# Introduction 
+
+## Introduction 
+### Motivation
+
+
+#### Why is research exciting?
+***"(...) the world is our lab, and the many diverse people in it are our subjects" [@metrics]***
+
+
+#### What are accounting researchers investigating?
+
+- What is the impact of digitalization on audit practices
+- What are the real effects of the disclosure regulation?
+- How do firms react to tax changes?   
+
+
+## Introduction 
+### Goal 
+
+<div style="text-align: center; display: flex; align-items: center; height: 50vh;">
+  <span style="color: #D73181; font-weight: bold; font-size: 64px;">Uncover the causal effect of an intervention</span> 
+</div>
+
+::: aside
+a.k.a. average treatment effect (ATE)
+:::
+
+## Introduction 
+### How do we find the answers?
+
+We use data to answer these “cause-and-effect” questions!
+
+
+![](https://i.insider.com/57f802dfdd0895e7358b4be1?width=700&format=jpeg&auto=webp){fig-align="center"}
+
+
+## Introduction 
+### How do we find the answers?
+
+We use data to answer these “cause-and-effect” questions!
+
+
+![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGMwMzkwZHFuNmJqMXk1eWwweTg5aHVwajBtMTBtNHdqMHRyNWw5OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1iTIu7WtSfPqMDbW/giphy.gif){fig-align="center"}
+
+
+## Introduction 
+### How do we find the answers?
+
+We use data to answer these “cause-and-effect” questions!
+
+
+
+<div style="text-align: center;">
+ <span style="color: red; font-weight: bold; font-size: 64px;">Correlation $\neq$ Causation </span> 
+</div>
+
+
+
+::: aside 
+
+
+**Correlation** is a statistical measure that expresses the extent to which two variables **are linearly related** (meaning they change together at a constant rate)
+
+
+:::
+
+# Trust the process
+
+## Theory, hypotheses, and operationalisation 
+### Theory
+
+![](/Pics/excalidraw/libby_box_concep.png)
+
+
+## Theory, hypotheses, and operationalisation 
+### Theory
+:::: {.columns}
+
+::: {.column width="50%"}
+**Conceptual level** 
+
+  - **Theory** to explain the relationship
+  - Formulate a **hypothesis** 
+:::
+
+::: {.column width="50%"}
+**Operational level** 
+
+  -  **Measure** the variables 
+  -  **Test** the hypothesis
+:::
+::::
+
+::: aside
+For more about experimental research in financial accounting, check @libby2002experimental
+:::
+
+## Theory, hypotheses, and operationalisation
+### What is a hypothesis?
+
+- A hypothesis is a **proposed explanation** for a phenomenon or a prediction of a possible causal correlation
+- It is a tentative answer to a research question that guides the direction of study and investigation
+- Its formulation is guided by existing (economic) **theory**
+- A well-constructed hypothesis is **testable**, meaning it can be **supported** or **rejected** through experimentation
+
+## Theory, hypotheses, and operationalisation
+### How do we test a hypothesis? {#How-do-we-test-a-hypothesis}
+
+::: {.panel-tabset}
+## Steps 
+- We need a baseline to test against: The **null hypothesis** ($H_0$)
+- Why null? It states that there is **no effect** or **no difference**, which serves as a baseline assumption
+  - $H_0$ is what you test your $H_1$ against, e.g. $H_0 = 0$ 
+  - $H_1$ is the/your alternative hypothesis - what you might believe to be true
+- A statistical test rejects $H_0$ if there is enough evidence against it
+  - If we reject $H_0$, we accept $H_1$
+
+## t-test
+
+The t-test measures how far the sample **mean** is away from  $H_0$ 
+
+Hypothesis:
+
+- One-sided ($H_0 \leq 0$, $H_1>0$): $t = \frac{X-0}{SE(X)}$
+- Two-sided ($H_0 = 0$, $H_1 \neq 0$): $t = \frac{X_{treated}-X_{control}}{SE(X_{treated}-X_{control})}$
+
+
+## Visual 
+```{r, echo=FALSE}
+
+set.seed(1234)
+
+## Standard normal distribution  dataset----
+
+normal <- 
+  tibble(x = seq(-4,4, by = 0.01),
+         y = dnorm(seq(-4,4, by = 0.01))) 
+
+# Create critical values to the left and right 
+# Source:  http://ianmadd.github.io/pages/FillAreaUnderCurve.html  
+criticalValues <- qnorm(c(.05,.95))
+
+shadeNormalTwoTailedLeft <- rbind(c(criticalValues[1],0), subset( normal, x < criticalValues[1]))
+
+shadeNormalTwoTailedRight <- rbind(c(criticalValues[2],0), subset( normal, x > criticalValues[2]), c(3,0))
+
+
+# Create dataset of 100 observation between -4 and 4 and normalize variables to standard normal distribution 
+
+normal %>% 
+  ggplot(., aes(x, y)) + 
+  geom_line() +
+  # dotted line 
+  geom_vline(xintercept = 0, color = "#EE7656") +
+  geom_polygon(data = shadeNormalTwoTailedLeft, aes(x=x, y=y), fill="#C9DBEA") +
+  geom_polygon(data = shadeNormalTwoTailedRight, aes(x=x, y=y), fill="#C9DBEA") +
+  labs(x="Standard deviation", y="Density",
+       title="") +
+  annotate("text",x = 0.9, y = 0.1, parse = TRUE,
+           label = "'Do not reject H'[0]",
+           color = "black", size = 4) +
+  annotate("text",x = -0.9, y = 0.1, parse = TRUE,
+           label = "'Do not reject H'[0]",
+           color = "black", size = 4) +
+  annotate("text",x = -3.8, y = 0.05, parse = TRUE,
+           label = "'Reject H'[0]",
+           color = "black", size = 4) +
+  annotate("text",x = 3.8, y = 0.05, parse = TRUE,
+           label = "'Reject H'[0]",
+           color = "black", size = 4) +
+  geom_segment(aes(x = -2., y = .002, xend = -3.5, yend = 0.04),
+               arrow = arrow(length = unit(0.25, "cm"))) +
+  geom_segment(aes(x = 2., y = .002, xend = 3.5, yend = 0.04),
+               arrow = arrow(length = unit(0.25, "cm"))) + 
+guides(color = "none",
+       fill = "none") + 
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom") 
+
+rm(normal, criticalValues,shadeNormalTwoTailedLeft, shadeNormalTwoTailedRight)
+
+```
+
+
+:::
+
+<!-- ## Theory, hypotheses, and operationalisation -->
+<!-- ### How does the t-test work? -->
+
+<!-- ```{r echo = FALSE} -->
+<!-- set.seed(123) -->
+<!-- # Throw a dice 10 times - repeat it 1000 times -->
+<!-- map(1:1000, ~ sample(1:6, size = 2, replace = TRUE) %>%  -->
+<!--       tibble(mean = mean(.), -->
+<!--              sd = sd(.), -->
+<!--              throws = length(.)) %>%  -->
+<!--       # keep only mean, sd, and throw, -->
+<!--       select(mean, sd, throws) %>% -->
+<!--       # Delete duplicates -->
+<!--       distinct()  -->
+<!--       )  %>%  -->
+<!--   bind_rows() %>%  -->
+<!--   mutate(id = row_number()) %>% -->
+<!--   # plot means of each throw -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_bar(stat = "count", fill = "#93B8D6") + -->
+<!--   geom_vline(xintercept = 3.5, color = "#9a2515") + -->
+<!--   scale_x_continuous(breaks = seq(1,6, by = .5), name = "Average of two throws") + -->
+<!--   labs(title = "", -->
+<!--        y = "Frequency") + -->
+<!--   guides(color = "none", -->
+<!--        fill = "none") +  -->
+<!--   ggthemes::theme_hc(base_size = 18) +  -->
+<!--   theme(legend.position="bottom")  -->
+<!-- ``` -->
+
+
+
+
+
+# Operationalisation
+
+## Causal inference
+### A small Becksperiment
+
+***Research question***: Does beer affect performance?
+
+- $H_0$: Beer consumption does not affect performance
+- $H_1$: Beer consumption affects performance
+
+::: aside
+Sometimes $H_1$ is referred to as a ***non-directional*** hypothesis. This means that it does not specify the direction of the effect. Theory allows for the affect to be positive or negative.
+:::
+
+## Becksperiment
+### What is the problem?
+
+::: {.panel-tabset}
+
+## Figure
+
+```{r echo = FALSE}
+set.seed(12)
+
+# Number of observations - student x year 
+n <- 500
+
+# Generate a student id variable - balanced panel
+
+id  <- rep(1:500,  each = 1)  %>% sort()
+
+# Generate a binary treatment variable
+becks_data <- tibble(
+  student = id,
+  # Generate a binary treatment variable that is positively associated with talent - omitted variable bias
+  treatment =  rbinom(n = n, size = 1, prob = 0.5) ,
+  education = sample(1:5, size = n, replace = TRUE) + 0.75*treatment,
+  gender = rbinom(n = n, size = 1, prob = .4),
+  talent = runif(n=n, min=0, max=2) + 2*treatment + 0.75*education  ,
+  treatment_random = rbinom(n = n, size = 1, prob = 0.5),
+  # Generate a continuous outcome variable
+  # Add some random noise to the outcome
+  performance  = 4 + 0*treatment + 0.4*talent + 0*treatment*talent + 0.6*education + -.2*gender + rnorm(n=n, mean=0, sd=1)
+)
+
+```
+
+
+```{r echo = FALSE}
+becks_data %>% 
+  group_by(treatment) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = beer, fill = beer)) +
+  geom_col() +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_fill_manual(name = "", values = c("#F7AB64", "#93B8D6")) +
+  labs(x="", y="Average Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="") +
+  ylim(0,10)
+```
+
+## Result
+
+
+#### Simple group comparison
+- The results suggest that, on average, beer drinking improves grades.
+- But is this true? Did we find the causal effect of beer drinking on grades?
+
+
+## Code
+
+```{r eval = FALSE, out.width="90%"}
+becks_data %>% 
+  group_by(treatment) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = beer, fill = beer)) +
+  geom_col() +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_fill_manual(name = "", values = c("#F7AB64", "#93B8D6")) +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="") +
+  ylim(0,10)
+```
+
+:::
+ 
+# Why can simple group comparison be misleading?
+
+
+## Becksperiment
+### How comparable are the groups, on average?
+
+```{r echo = F}
+# Define custom function to summarize data by group 
+
+summariza <- function(data = tibble(), vars = all_of(), group = all_of()){
+  data %>% 
+    group_by(!!!syms(group)) %>% 
+    summarise(across(all_of(vars), ~ mean(.x, na.rm = T))) %>% 
+    ungroup() %>% 
+    pivot_wider(names_from=group,  values_from = vars) %>% 
+    mutate(diff = `1` - `0`) %>% 
+    rename("Beer" = `1`, "No beer" = `0`, "Difference" =  diff) %>% 
+    mutate(Variable = str_to_sentence(vars)) %>%
+    select(4, 2,1,3)
+}
+```
+
+```{r echo = F}
+# Define custom function to to a t-test for each variable 
+
+# It is kind of redundant to do this, but it is a good example of how to use a function to do a t-test for each variable
+# And also shows how to join to datasets later 
+
+
+# Define function that executes for each variable that you "feed" into it a t-test
+
+t_testa <- function(vars = all_of(), data = tibble(), group = all_of() ){
+  
+  # Make formula that includes the variable that you want to use in the t-test
+  
+  formula( paste0(all_of(vars), "~ ", all_of(group)) ) %>% 
+    t.test(., data) %>%
+    broom::tidy() %>%
+    select(1:5) %>%
+    mutate(Variable =all_of(vars)) %>%
+    rename("Difference in means"  = estimate,
+           "Mean treatment"       = estimate2,
+           "Mean control"         = estimate1,
+           "p-value"              = p.value,
+           "t-stat."              = statistic) %>%
+    relocate(Variable, `Mean treatment`, `Mean control`)
+  
+}
+  
+```
+
+
+
+```{r echo = F}
+# Make quick summary statistics for each variable
+variables <- c( "performance", "education", "gender")
+summary_stats <- map(variables, 
+                     # Check .qmd file to see how summarize function is defined
+                     ~ summariza(data = becks_data,
+                                 vars = .x, 
+                                 group = "treatment") ) %>% 
+  bind_rows()
+
+# Add t-test results to summary statistics
+
+ttest <- 
+  map(variables,~ 
+        t_testa(data = becks_data, vars = .x, group = "treatment") ) %>% 
+  bind_rows() %>%
+  # Only keep what's needed
+  select(1,5,6) %>% 
+  # Adjsut names to be the same as the summary statistics
+  mutate(Variable = str_to_sentence(Variable))
+
+# Join t-test results to summary statistics
+
+summary_stats <- summary_stats %>%
+  # inner join would also work here 
+  left_join(ttest, by = "Variable") 
+  
+  rm(variables)
+
+# Output summary statistics as nice table 
+summary_stats %>% 
+  kable("html", digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+
+
+::: aside
+**"Eye test"**
+- The beer group has a higher average grade (***performance***)
+- The groups are comparable on average for gender[^1] but not for education 
+:::
+
+[^1]: The gender variable is coded as 1 if the subject identifies as female, and 0 otherwise. The education variable is continuous - larger values indicate better prior education.
+
+## Becksperiment
+### Do other factors play a role?
+
+::: {.panel-tabset}
+
+## Figure
+
+```{r echo = FALSE}
+# Plot results for simple group comparison - condition on observed factors
+
+becks_data %>% 
+  mutate(high_edu = case_when(education > mean(becks_data$education) ~ 1, 
+                              education <=  mean(becks_data$education) ~ 0) %>% as.character()) %>% 
+  group_by(treatment, high_edu) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = high_edu, color = high_edu)) +
+  geom_point(size = 2) +
+  geom_line(aes(group = high_edu), linetype = "dashed", size = 1.5 ) +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_color_manual(values = c("0" = "#93B8D6", "1" = "#F7AB64"), name = "High education") +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom") +
+  ylim(4,10)
+
+```
+
+<!-- Let's check if conditioning on prior education explains the difference in grades between the two groups -->
+
+## Code
+
+```{r eval= FALSE}
+# Plot results for simple group comparison - condition on observed factors
+
+becks_data %>% 
+  mutate(high_edu = case_when(education > mean(becks_data$education) ~ 1, 
+                              education <=  mean(becks_data$education) ~ 0) %>% as.character()) %>% 
+  group_by(treatment, high_edu) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = high_edu, color = high_edu)) +
+  geom_point(size = 2) +
+  geom_line(aes(group = high_edu), linetype = "dashed", size = 1.5 ) +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_color_manual(values = c("0" = "#93B8D6", "1" = "#F7AB64"), name = "High education") +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom")+
+  ylim(4,10)
+
+
+```
+
+
+:::
+
+## Becksperiment
+### Do other factors play a role?
+
+::: {.panel-tabset}
+
+## Figure
+
+```{r echo = FALSE}
+# Plot results for simple group comparison - condition on observed factors
+
+becks_data %>% 
+  group_by(treatment, gender) %>% 
+  mutate(gender = as.character(gender)) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = gender, color = gender)) +
+  geom_point(size = 2) +
+  geom_line(aes(group = gender), linetype = "dashed", size = 1.5) +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_color_manual(values = c("0" = "#93B8D6", "1" = "#F7AB64"), name = "Gender") +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom")+
+  ylim(4,10)
+```
+
+## Code 
+
+```{r eval = FALSE}
+becks_data %>% 
+  group_by(treatment, gender) %>% 
+  mutate(gender = as.character(gender)) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = gender, color = gender)) +
+  geom_point(size = 2) +
+  geom_line(aes(group = gender), linetype = "dashed", size = 1.5) +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_color_manual(values = c("0" = "#93B8D6", "1" = "#F7AB64"), name = "Gender") +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom")+
+  ylim(4,10)
+```
+
+
+:::
+
+
+## Becksperiment
+### Do **unobservable** factors play a role?
+
+::: {.panel-tabset}
+
+## Figure
+
+```{r echo = FALSE}
+# Plot results for simple group comparison - condition on observed factors
+
+becks_data %>% 
+  mutate(high_tal = case_when(talent > mean(talent) ~ 1 , 
+                              TRUE ~ 0) %>% as.character()) %>% 
+  group_by(treatment, high_tal) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment == 1 ~ "Beer", 
+                          treatment == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = high_tal, color = high_tal)) +
+  geom_point(size = 2) +
+  geom_line(aes(group = high_tal), linetype = "dashed", size = 1.5 ) +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_color_manual(values = c("0" = "#93B8D6", "1" = "#F7AB64"), name = "High talent") +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom") +
+  ylim(4,10)
+
+```
+
+
+
+## Summary statistics 
+
+```{r echo = F}
+# Make quick summary statistics for each variable
+variables <- c("performance", "talent", "education", "gender")
+summary_stats <- map(variables, 
+                     # Check .qmd file to see how summarize function is defined
+                     ~ summariza(data = becks_data,
+                                 vars = .x, 
+                                 group = "treatment") ) %>% 
+  bind_rows()
+
+# Add t-test results to summary statistics
+
+ttest <- 
+  map(variables,~ 
+        t_testa(data = becks_data, vars = .x, group = "treatment") ) %>% 
+  bind_rows() %>%
+  # Only keep what's needed
+  select(1,5,6) %>% 
+  # Adjsut names to be the same as the summary statistics
+  mutate(Variable = str_to_sentence(Variable))
+
+# Join t-test results to summary statistics
+
+summary_stats <- summary_stats %>%
+  # inner join would also work here 
+  left_join(ttest, by = "Variable") 
+  
+  rm(variables)
+
+# Output summary statistics as nice table 
+summary_stats %>% 
+  kable("html", digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F, font_size = 24)
+```
+
+
+## Correlation table 
+
+```{r echo =F}
+library(ggcorrplot)
+
+# Calculate correlations 
+becks_data_corr <- becks_data 
+names(becks_data_corr) <- names(becks_data) %>% str_to_sentence()
+
+corr <- 
+  becks_data_corr %>% 
+  select(- Student , -Treatment_random) %>% 
+  cor(.) %>% 
+  round(.,2)
+
+ggcorrplot(corr,
+           hc.order = TRUE,
+           type = "upper",
+           lab = TRUE) + 
+  xlab("") + ylab("") +
+    ggthemes::theme_hc(base_size = 16) + 
+  theme(legend.position="bottom") 
+
+rm(becks_data_corr)
+
+```
+
+
+
+## Code
+
+```{r eval= FALSE}
+library(ggcorrplot)
+# Calculate correlations 
+# I make a copy of the dataset for nicer names in the correlation plot
+becks_data_corr <- becks_data 
+names(becks_data_corr) <- names(becks_data) %>% str_to_sentence()
+
+# Calculate correlations 
+becks_data_corr <- becks_data 
+names(becks_data_corr) <- names(becks_data) %>% str_to_sentence()
+
+corr <- 
+  becks_data_corr %>% 
+  select(- Student , -Treatment_random) %>% 
+  cor(.) %>% 
+  round(.,2)
+
+ggcorrplot(corr, hc.order = TRUE,type = "upper", lab = TRUE) + 
+  xlab("") + ylab("") +
+  ggthemes::theme_hc(base_size = 16) + 
+  theme(legend.position="bottom") 
+
+rm(becks_data_corr)
+
+```
+
+:::
+
+# How can we get rid of the selection bias?
+
+## Becksperiment
+### Randomly assigning beer drinking
+
+::: {.panel-tabset}
+
+## Figure
+
+```{r echo = FALSE}
+becks_data %>% 
+  group_by(treatment_random) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment_random == 1 ~ "Beer", 
+                          treatment_random == 0 ~ "No beer"),
+           # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = beer, fill = beer)) +
+  geom_col() +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_fill_manual(name = "", values = c("#F7AB64", "#93B8D6")) +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom") +
+  ylim(0,10)
+```
+
+## Summary statistics 
+
+```{r echo = F}
+# Make quick summary statistics for each variable
+variables <- c( "performance", "education", "gender", "talent")
+summary_stats <- map(variables, 
+                     # Check .qmd file to see how summarize function is defined
+                     ~ summariza(data = becks_data,
+                                 vars = .x, 
+                                 group = "treatment") ) %>% 
+  bind_rows()
+
+# Add t-test results to summary statistics
+
+ttest <- 
+  map(variables,~ 
+        t_testa(data = becks_data, vars = .x, group = "treatment_random") ) %>% 
+  bind_rows() %>%
+  # Only keep what's needed
+  select(1,5,6) %>% 
+  # Adjsut names to be the same as the summary statistics
+  mutate(Variable = str_to_sentence(Variable))
+
+# Join t-test results to summary statistics
+
+summary_stats <- summary_stats %>%
+  # inner join would also work here 
+  left_join(ttest, by = "Variable") 
+  
+  rm(variables)
+
+# Output summary statistics as nice table 
+summary_stats %>% 
+  kable("html", digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+
+## Code 
+
+```{r eval = FALSE}
+becks_data %>% 
+  group_by(treatment_random) %>% 
+  summarise(across("performance" , ~ mean(.x))) %>% 
+  mutate(beer = case_when(treatment_random == 1 ~ "Beer", 
+                          treatment_random == 0 ~ "No beer"),
+         # Cosmetic change to reorder so "Beer" is on the left
+         beer = factor(beer, levels = c("Beer", "No beer"))) %>%
+  ggplot(aes(x = beer, y = performance, group = beer, fill = beer)) +
+  geom_col() +
+  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_fill_manual(name = "", values = c("#F7AB64", "#93B8D6")) +
+  labs(x="", y="Grade") +
+  ggthemes::theme_hc(base_size = 18) + 
+  theme(legend.position="bottom") +
+  ylim(0,10)
+```
+
+:::
+
+
+
+## Becksperiment
+### Takeaways
+
+- ***Random assignment*** assures that the effect is not due to ***selection bias***
+- The difference in talent between the groups is statistically insignificant
+  - The selection bias disappears
+
+
+
+## The gold standard: Experiments
+### Why is randomization so important?
+
+- ***Controlling variation*** in the causal variable, e.g. beer drinking
+
+- Makes sure that the treatment and control group are similar along observable and ***unobservable*** dimensions
+
+- The ***only difference between the two groups is the treatment***
+
+- This allows us to ***attribute any difference in outcomes to the treatment***
+
+- No selection bias (endogeneity issue)
+
+::: aside
+Another term for Experiments is ***Randomized Controlled Trials (RCTs)***.
+:::
+
+
+## The gold standard: Experiments
+### Designing and analyzing experiments 
+
+Types of experiments:
+
+- Field experiments
+  - aim to be as similar as possible to real-world decision situations
+- A/B testing 
+  - aim to evaluate different versions of the same product
+- ***Lab experiments***
+  - are carried out in an artificial environment, usually a computer lab
+
+::: aside
+For more in-depth information on experiments and other causal inference methods, see @bekes2021data.
+:::
+
+## The gold standard: Experiments
+### Setup of an experiment
+
+- Random assignment of treatment via **assignment rule**
+- Number of subjects? Ideally large, exact number via **power analysis**
+  - *How many subjects do I need to detect a certain effect size?*
+- Proportion of treated subjects? Ideally 50/50
+- Covariate balance 
+  - Did random assignment work?
+  
+  
+## The gold standard: Experiments
+### External and internal validity
+
+- Internal validity
+  - Extent to which experiment identifies causal effect of treatment
+- External validity
+  - Extent to which results generalize to other situations
+
+:::aside
+🚨💼🧠 **Trade-off**
+
+- High external validity more likely achieved in ***real world*** situation
+- High internal validity more likely achieved in ***controlled*** situation
+- How well does the result from "controlled situation" generalize to the ***real world***?
+:::
+
+###
+## Experiments in practice
+- Design can be complicated
+  - Intention to treat versus actual treatment
+- Experiments need careful ***planning***
+  - Results uninformative or misleading if poorly designed
+- Analysis is relatively simple **to do** and to **communicate** 
+
+::: aside
+When ***compliance*** is not perfect the intention to treat effect is the effect of being assigned to the treatment group, not the effect of actually receiving the treatment.
+:::
+
+## The gold standard: Experiments
+### Takeaways
+
+- Random assignment assures that effect is not due to ***selection bias***
+- In the experiment **you control**...
+  -  who receives the treatment (the treatment group),...
+  - and who doesn't (the control group)
+- You can control other aspects of the situation to avoid other confounders
+- You can measure the effect of the treatment on the outcome
+- Potential **trade-off** between **internal and external validity**
+
+
+# What to do if controlling random assignment is not possible?
+
+# Difference-in-differences
+
+
+## Difference-in-differences
+### What does it look like?
+
+```{r echo=FALSE}
+  triangle <- tibble(group = c(1,1,1), polygon.x = c(0,1,1), polygon.y = c(4,5,4))
+  bias <- tibble(polygon.x = c(0,0,1,1), polygon.y = c(3,4,4,3))
+  unobserved <-  tibble(polygon.x = c(-1,-1,0,0), polygon.y = c(3,4,4,3))
+  
+  tibble(
+    treated= as.factor(c(1,1,1,0,0,0,2,2)),
+    time = c(-1,0,1,-1,0,1,0,1),
+    y = c(4,4,5,3,3,3,4,4) ) %>% 
+    ggplot() +
+    geom_point(aes(time, y, group = treated, color = treated, linetype = treated)) +
+    geom_line(aes(time, y, group = treated, color = treated, linetype = treated), size = 2) +
+    geom_polygon(data = triangle, aes(x =  polygon.x,
+                                      y = polygon.y,
+                                      group = group),
+                 #color = "red",
+                 fill = "#F7AB64", alpha = .4) +
+    geom_polygon(data = bias, aes(x =  polygon.x,
+                                      y = polygon.y),
+                 #color = "red",
+                 fill = "#93B8D6", alpha = .4) +
+    geom_polygon(data = unobserved, aes(x =  polygon.x,
+                                  y = polygon.y),
+                 #color = "red",
+                 fill = "#93B8D6", alpha = .4) +
+    annotate("text", x = .55, y = 4.2, parse = TRUE,
+             label = "Delta * ' Causal effect'") + 
+    # annotate("text", x = .55, y = 3.8, parse = TRUE,
+    #          label = "+ ' Selection bias'") + 
+    geom_text(x=-.5, y=3.5, label="Permanent (un-)observed\ndifferences prior\nto treatment") +
+    geom_vline(xintercept = 0, colour = "grey") +
+    scale_y_continuous(breaks = seq(1,10,1)) +
+    scale_x_continuous(breaks = seq(-1,1,1)) +
+    scale_color_manual(name = "", 
+                       breaks = c(1,0,2),
+                       values = c("1" = "#F7AB64", "0" = "#93B8D6", "2" = "#616363"),
+                       labels = c("Treatment","Control", "Counterfactual")) +
+    scale_linetype_manual( name = "", 
+                           breaks = c(1,0,2),
+                           values = c("1" = "solid", "0" = "solid", "2" = "dashed"),
+                           #values=c("solid", "solid", "dashed"),
+                           labels = c("Treatment", "Control", "Counterfactual")) +
+    labs(x="Time", y="Outcome") +
+    guides(alpha = "none",
+           fill = "none") + 
+    ggthemes::theme_hc(base_size = 18) + 
+    theme(legend.position="bottom") +
+    ylim(c(2,5))
+```
+
+
+:::aside
+🚨💼🧠 DiD only recovers the causal effect if the **parallel trends assumption** holds!
+:::
+
+
+## Difference-in-differences
+### What is the idea behind DiD?
+
+|                    | (1) After    | (2) Before     |  (1) - (2)      |
+|--------------------|--------------|----------------|-----------------|
+| (a) Treatment      | Y$_{treated,\ after}$   |  Y$_{treated,\ before}$      |    $\Delta_{treated}$              |
+| (b) Control        | Y$_{control,\ after}$           | Y$_{control,\ before}$ |      $\Delta_{control}$  |   
+|  (a) - (b)         |   $\Delta_{after}$           |    $\Delta_{before}$            |       DiD           | 
+
+: {tbl-colwidths="[25,25,25,25]"}
+
+::: aside
+Notation adapted to fit the table.
+:::
+
+
+## Difference-in-differences
+
+### A typical DiD regression looks like this
+
+$$Y = \beta_0 + \beta_1 Treated + \beta_2 After + \beta_3 Treated \times After + \epsilon$$
+
+- The difference-in-differences regression gives you the same estimate as if you took differences in the group averages
+
+- It takes also care of any unobserved **constant differences between subjects** and **time trends**!
+
+
+
+## Difference-in-differences
+
+### What do the coefficients tell us?
+
+$$Y = \beta_0 + \beta_1 Treated + \beta_2 After + \beta_3 Treated \times After + \epsilon$$
+
+|               | (1) After                           | (2) Before          | (1) - (2)         |
+| ------------- | ----------------------------------- | ------------------- | ----------------- |
+| (a) Treatment | $\beta_0 + \beta_1+\beta_2+\beta_3$ | $\beta_0 + \beta_1$ | $\beta_2+\beta_3$
+| (b) Control   | $\beta_0 + \beta_2$                 | $\beta_0$           | $\beta_2$         |
+| (a) - (b)     | $\beta_1+\beta_3$                   | $\beta_1$           | $\beta_3$         |
+
+: {tbl-colwidths="[30,25,25,20]"}
+
+
+## Difference-in-differences (DiD)
+### DiD in action
+:::: columns
+::: {.column width="50%"}
+
+![](/Pics/m_restud_84_3cover.jpeg){width="75%"}
+:::
+::: {.column width="50%" style="font-size: 120%"}
+***“High” Achievers?***
+
+**Cannabis Access and Academic Performance** 
+
+by @marie2017high
+:::
+::::
+
+
+## Difference-in-differences (DiD)
+### DiD in action
+
+::: {.panel-tabset}
+
+## Idea
+
+"In order to estimate the effect of legal cannabis access on student performance, we exploit a unique ***natural experiment*** that ***temporarily discriminated legal access to cannabis*** based on ***nationality***. We apply a difference-in-differences approach across time and nationality groups." 
+
+  - See @dunning2012natural for more on *natural experiments*
+  - [Link to paper](https://academic.oup.com/restud/article/84/3/1210/3091869?login=true#89551119)
+
+
+
+## Setting
+
+:::: columns
+::: {.column width="30%"}
+
+![](/Pics/vocm-1-okt-2011-poster.png.gif)
+:::
+
+::: {.column width="70%"}
+- “drug tourists” from Belgium, Germany, Luxembourg, and France 
+- substantial part of the city's population are students
+- ... about 16,000 individuals studying at Maastricht University, > 50% whom are non-Dutch nationals
+:::
+::::
+
+## Result 
+
+- ***Academic performance*** of students who are no longer legally permitted to buy cannabis ***increases***
+
+- Grade improvements are driven by younger students
+
+- Effects are stronger for women and low performers
+
+- Performance gains are larger for courses that require ***more numerical/mathematical skills***
+
+- ***Performance gains*** are driven by an ***improved understanding*** not than changes in students’ study effort
+
+:::
+
+## Difference-in-differences 
+### Effect of policy change on student grades
+
+
+```{r echo=FALSE}
+# Generate data for DiD example
+# Set seed for reproducibility
+set.seed(123)
+
+# Number of observations - student x year 
+n <- 500
+
+# Generate a student id variable - balanced panel
+
+id  <- rep(1:100,  each = 5)  %>% sort()
+
+# Generate a binary treatment variable
+did_data <- tibble(
+  student = id,
+  treatment = rep(0:1, each = n/2),
+  # Generate a binary time variable - 2 years 
+  year = rep(1:5, n/5) - 3,
+  after = case_when(year <= 0 ~ 0,
+                    TRUE ~ 1),
+  # Generate a continuous outcome variable
+  # Assume the treatment has an effect of 2 units on the outcome
+  # Add some random noise to the outcome
+  performance = 7.5 + -1.5*treatment + 0*after +  1.1*treatment * after + .2*rnorm(n)
+)
+
+rm(id, n)
+```
+
+
+::: {.panel-tabset}
+
+## Figure
+
+```{r echo=FALSE}
+# Eye-test 
+
+did_data  %>% 
+  group_by(treatment, year)  %>%
+  summarise(performance = mean(performance, rm.na = TRUE))  %>% 
+  mutate(type  = case_when(treatment == 1 ~ "Treated group",
+                           TRUE ~ "Control group") ) %>%
+  ggplot(aes(x = year, y = performance, color = type) ) +
+  geom_point(size = 2) + 
+  geom_line(size = 1) +
+  scale_color_manual(values = c( "#93B8D6", "#F7AB64"), name = "" ) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey") +
+  scale_y_continuous(breaks = seq(4, 8, .5),limits = c(5, 8) ) +
+  ggthemes::theme_hc(base_size = 18) + 
+  labs(x = "Time", y ="Grade") +
+  theme(legend.position="bottom")
+  
+```
+
+## Code
+
+```{r eval=FALSE}
+# Eye-test 
+
+did_data  %>% 
+  group_by(treatment, year)  %>%
+  summarise(performance = mean(performance, rm.na = TRUE))  %>% 
+  mutate(type  = case_when(treatment == 1 ~ "Treated group",
+                           TRUE ~ "Control group") ) %>%
+  ggplot(aes(x = year, y = performance, color = type) ) +
+  geom_point(size = 2) + 
+  geom_line(size = 1) +
+  scale_color_manual(values = c( "#93B8D6", "#F7AB64"), name = "" ) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey") +
+  scale_y_continuous(breaks = seq(4, 8, .5),limits = c(5, 8) ) +
+  ggthemes::theme_hc(base_size = 18) + 
+  labs( x = "Time", y ="Grade") +
+  theme(legend.position="bottom")
+  
+```
+
+:::
+
+## Difference-in-differences 
+### Let's have a look at simple averages 
+
+::: {.panel-tabset}
+
+## Table
+
+```{r echo=FALSE}
+#| label: tbl-did
+#| tbl-cap: "Effect of policy change on student grades"
+
+
+# Descriptive statistics
+table_did <- 
+did_data  %>% 
+  group_by(treatment, after) %>%
+  summarise(performance = mean(performance, rm.na = TRUE))  %>% 
+  spread(after, performance) %>%
+  mutate(Difference = `1` - `0`) %>% 
+  rename(" " = treatment,
+         "After" = `1`,
+         "Before" = `0`) %>% 
+  select(" ", "After", "Before", Difference) %>%
+  mutate(" " = case_when(` ` == 1 ~ "Treated group",
+                         TRUE ~ "Control group") ) %>% 
+  arrange(Before)
+
+table_did <- table_did %>% bind_rows(
+  # Add difference column
+  tibble(
+    " " = "Difference",
+    After = table_did$After[1] - table_did$After[2],
+    Before = table_did$Before[1] - table_did$Before[2],
+    Difference = After - Before))
+
+table_did %>% 
+  kable(digits = 2) %>% 
+  kable_styling(., "striped", position = "left", font_size = 35)
+  
+  
+```
+
+## Code
+
+
+
+```{r echo=TRUE, eval=FALSE}
+#| label: tbl-did-code
+#| tbl-cap: "Effect of policy change on student grades"
+#| figwidth: 8
+
+
+# Descriptive statistics
+table_did <- 
+did_data  %>% 
+  group_by(treatment, after) %>%
+  summarise(performance = mean(performance, rm.na = TRUE))  %>% 
+  spread(after, performance) %>%
+  mutate(Difference = `1` - `0`) %>% 
+  rename(" " = treatment,
+         "After" = `1`,
+         "Before" = `0`) %>% 
+  select(" ", "After", "Before", Difference) %>%
+  mutate(" " = case_when(` ` == 1 ~ "Treated group",
+                         TRUE ~ "Control group") ) %>% 
+  arrange(Before)
+
+table_did <- table_did %>% bind_rows(
+  # Add difference column
+  tibble(
+    " " = "Difference",
+    After = table_did$After[1] - table_did$After[2],
+    Before = table_did$Before[1] - table_did$Before[2],
+    Difference = After - Before))
+
+table_did %>% 
+  kable(digits = 2) %>% 
+  kable_styling(., "striped", position = "left", font_size = 35)
+  
+  
+```
+
+:::
+
+
+## Difference-in-differences 
+### Let's check the OLS results
+::: {.panel-tabset}
+
+## Table
+:::: {.columns}
+::: {.column width="50%"}
+```{r echo=FALSE, results='asis'}
+#| label: Effect of policy change on student grades
+
+# Set Table style 
+  
+  # Dictionary => set only once per session
+dict <- setFixest_dict( c(performance            = "Grade",
+                          treatment          = "Treatment",
+                          after              = "After",
+                          student            = "Student ID",
+                          year               = "Year"
+                        
+))
+
+# The style of the table
+my_style = style.tex(tpt = TRUE, 
+                     notes.tpt.intro = "\\footnotesize")
+setFixest_etable(style.tex = my_style, markdown = TRUE)
+
+
+# Run DiD regression
+a <- feols(performance ~ treatment * after , data = did_data, vcov = "hetero" ) 
+
+b <- feols(performance ~ treatment:after | student + year , data = did_data)
+
+# Output/Export table 
+ etable( a,b,
+          title    = "Effect of policy change on student grades",
+          digits   = 3,
+          tex      = TRUE,
+          fitstat  = ~ar2 + n,
+          replace = T,
+          style.tex = style.tex("aer"),
+          highlight = .("rowcol, #F7AB64, se" = "treatment:after"),
+          coef.just = "l",
+          placement = "h!",
+          order = c("!Constant", "^treatment:after$", "treatment", "after"),
+          headers = list("OLS" = 1, "Fixed effects" = 1),
+          view = T
+          # notes = c("The table reports the results of a difference-in-differences (DiD) regression. The dependent variable is the student's grade. The treatment variable is a dummy variable that takes the value of 1 if the student is in the treatment group and 0 otherwise. The after variable is a dummy variable that takes the value of 1 if the observation is after the treatment and 0 otherwise. The DiD coefficient is the coefficient of interest. The table also reports the results of a fixed effects regression with student and year fixed effects. More about fixed effects during lecture 2.") 
+         )
+```
+:::
+
+::: {.column width="50%" style="font-size: 70%"}
+
+$\text{Treatment} \times \text{After}$
+
+- shows the difference-in-differences
+- the effect is statistically significant
+- fixed effects regression confirms the result
+
+[**Crucial assumption**: Parallel trends between treatment and control in the pre-period!]{.aside}
+
+:::
+::::
+
+## Code
+
+```{r eval=FALSE}
+
+# Set Table style 
+  
+  # Dictionary => set only once per session
+dict <- setFixest_dict( c(performance            = "Grade",
+                          treatment          = "Treatment",
+                          after              = "After",
+                          student            = "Student ID",
+                          year               = "Year"
+))
+
+# The style of the table
+my_style = style.tex(tpt = TRUE, 
+                     notes.tpt.intro = "\\footnotesize")
+setFixest_etable(style.tex = my_style, markdown = TRUE)
+
+
+# Run DiD regression
+a <- feols(performance ~ treatment * after , data = did_data, vcov = "hetero" ) 
+
+b <- feols(performance ~ treatment:after | student + year , data = did_data)
+
+# Output/Export table 
+ etable( a,b,
+          title    = "Effect of policy change on student grades",
+          digits   = 3,
+          tex      = TRUE,
+          fitstat  = ~ar2 + n,
+          replace = T,
+          style.tex = style.tex("aer"),
+          highlight = .("rowcol, #F7AB64, se" = "treatment:after"),
+          coef.just = "l",
+          placement = "h!",
+          order = c("!Constant", "^treatment:after$", "treatment", "after"),
+          headers = list("OLS" = 1, "Fixed effects" = 1),
+          view = T)
+  )
+```
+
+::: 
+
+## Difference-in-differences {.center}
+### Averages versus DiD OLS regression
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r echo=FALSE, results='asis'}
+
+# Set Table style 
+  
+  # Dictionary => set only once per session
+dict <- setFixest_dict( c(performance            = "Grade",
+                          treatment          = "Treatment",
+                          after              = "After",
+                          student            = "Student ID",
+                          year               = "Year"
+))
+
+# The style of the table
+my_style = style.tex(tpt = TRUE, 
+                     notes.tpt.intro = "\\footnotesize")
+setFixest_etable(style.tex = my_style, markdown = TRUE)
+
+
+# Run DiD regression
+a <- feols(performance ~ treatment * after , data = did_data, vcov = "hetero" ) 
+
+b <- feols(performance ~ treatment:after | student + year , data = did_data)
+
+# Output/Export table 
+ etable( a,b,
+          title    = "Effect of policy change on student grades",
+          digits   = 3,
+          tex      = TRUE,
+          fitstat  = ~ar2 + n,
+          replace = T,
+          style.tex = style.tex("aer"),
+          highlight = .("rowcol, #F7AB64, se" = "treatment:after"),
+          coef.just = "l",
+          placement = "h!",
+          order = c("!Constant", "^treatment:after$", "treatment", "after"),
+          headers = list("OLS" = 1, "Fixed effects" = 1),
+          view = T
+          # notes = c("The table reports the results of a difference-in-differences (DiD) regression. The dependent variable is the student's grade. The treatment variable is a dummy variable that takes the value of 1 if the student is in the treatment group and 0 otherwise. The after variable is a dummy variable that takes the value of 1 if the observation is after the treatment and 0 otherwise. The DiD coefficient is the coefficient of interest. The table also reports the results of a fixed effects regression with student and year fixed effects. More about fixed effects during lecture 2.") 
+         )
+```
+:::
+
+::: {.column width="50%"}
+
+```{r echo=FALSE}
+#| label: averages-vs-did
+#| tbl-cap: "Effect of policy change on student grades"
+
+
+# From above
+table_did %>% 
+  kable(digits = 2) %>% 
+  kable_styling(., "striped", position = "center", full_width = FALSE, font_size = 20)
+  
+  
+```
+:::
+
+::::
+
+
+## Difference-in-differences 
+### Treatment effect in "event-time"
+::: {.panel-tabset}
+
+# Figure and table 
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+
+```{r echo=FALSE}
+#| results: asis
+
+feols(performance ~ i(year, treatment, -1) | student + year , data = did_data) %>% 
+ggiplot(
+    ref.line = -1,
+    main = "Event-study graph",
+    xlab = "Time to treatment",
+    #aggr_eff = "After", aggr_eff.par = list(col="#9a2515"),
+    multi_style = "facet",
+    geom_style = "ribbon",
+    col = "#9a2515",
+    #facet_args = list(labeller = labeller(id = \(x) gsub(".*: ", "", x))),
+    theme = ggthemes::theme_hc(base_size = 18) +
+        theme(
+            text = element_text(),
+            plot.title = element_text(hjust = 0.5),
+            legend.position = "none"
+        )
+)
+```
+:::
+
+::: {.column width="20%"}
+ 
+
+```{r echo=FALSE}
+#| results: asis
+d  <- feols(performance ~ i(year, treatment, -1) | student + year , data = did_data) 
+
+etable(d,
+          title    = "Effect of policy change on student grades\n Event study",
+          digits   = 3,
+          tex      = TRUE,
+          fitstat  = ~ar2 + n,
+          replace = T,
+          style.tex = style.tex("aer"),
+          highlight = .("rowcol, #F7AB64, se" = c("year::-2:treatment"),
+                        "rowcol, #F7AB64, se" = c("year::1:treatment","year::2:treatment")),
+          coef.just = "l",
+          placement = "h!",
+          view = T
+         )
+
+```
+
+:::
+<!-- :::aside -->
+
+<!-- - Table shows the treatment effect in "event-time", relative to Year$_{t-1}$ -->
+<!-- - No evidence of statistically significant differences in the pre-treatment period(s) -->
+<!--   -  ***Parallel trends?*** ($\checkmark$) -->
+<!-- ::: -->
+
+::::
+
+# Code table 
+
+```{r eval=F}
+feols(performance ~ i(year, treatment, -1) | student + year , data = did_data) %>% 
+  etable(.,
+          #title    = "Effect of policy change on student grades",
+          digits   = 3,
+          tex      = TRUE,
+          fitstat  = ~ar2 + n,
+          replace = T,
+          style.tex = style.tex("aer"),
+          highlight = .("rowcol, #C9DBEA, se" = c("year::-2:treatment"),
+                        "rowcol, #E7E8EE, se" = c("year::1:treatment","year::2:treatment")),
+          coef.just = "l",
+          placement = "h!",
+          view = T
+         )
+```
+
+
+# Code figure
+
+```{r eval=FALSE}
+feols(performance ~ i(year, treatment, -1) | student + year , data = did_data) %>% 
+ggiplot(
+    ref.line = -1,
+    main = "",
+    xlab = "Time to treatment",
+    multi_style = "facet",
+    geom_style = "ribbon",
+    col = '#F7AB64',
+    #facet_args = list(labeller = labeller(id = \(x) gsub(".*: ", "", x))),
+    theme = ggthemes::theme_hc(base_size = 18) +
+        theme(
+            text = element_text(),
+            plot.title = element_text(hjust = 0.5),
+            legend.position = "none"
+        )
+)
+```
+
+::: 
+
+
+
+# Take aways
+
+## Take aways
+### Randomized trails 
+
+- Simple comparisons of averages can be misleading
+  - ***Selection bias***
+- (controlled) Random assignment assures that the treatment and control group are similar
+- Controlled experiments sometimes face a trade-off between ***internal*** and ***external*** validity
+  
+## Take aways
+### Difference-in-differences (DiD)
+
+- Idea: Comparing the average changes of the outcome among units in the treatment group and in the non-treatment group, before and after the intervention
+- Important: ***Parallel trends assumption*** 
+  - Can't be tested
+  - Pre-intervention trends can give indirect evidence
+
+
+# 
+::: {.r-fit-text}
+Good luck with your BSc projects!
+:::
+
+
+
+<!-- ::: {.r-fit-text} -->
+<!-- See you in the ***Accounting MSc***! -->
+
+<!-- ::: -->
+
+<!-- {fig-align="center"} -->
+<!-- <img src="https://c.tenor.com/3EYd9ID79vcAAAAd/mic-drop-the-voice.gif" data-lazy-loaded=""> -->
+
+## See you soon ...
+### in our ***Accounting MSc***!
+![](https://c.tenor.com/3EYd9ID79vcAAAAd/mic-drop-the-voice.gif){fig-align="center"}
+
+# Appendix
+
+# 
+::: {.r-fit-text}
+References & useful resources
+:::
+
+## References
+### Papers and books 
+
+::: {#refs}
+:::
+
+
+## Useful resources
+### Writing
+
+[How to review a paper (general advice)](https://www.nature.com/articles/d41586-018-06991-0)
+
+[How to review an accounting paper](https://publications.aaahq.org/iae/article-abstract/31/2/219/7979/How-to-Review-a-Paper?redirectedFrom=fulltext)
+
+[ERIM journal list](https://www.erim.eur.nl/about-erim/erim-journals-list-ejl/?tx_erimjournallist_journal%5Bfilter%5D%5Bprogramme%5D=Finance%20%26%20Accounting%20%28F%26A%29&cHash=fa030186142206dc5f2929cbd7e64968)
+
+[Writing Tips For Economics Research Papers](https://dash.harvard.edu/handle/1/11041649)
+
+
+## Useful resources
+### Textbooks about causal inference
+
+[Causal Inference: The Mixtape](https://mixtape.scunning.com/)
+
+[The effect: An introduction to research design and causality](https://theeffectbook.net/)
+
+[Research Design in the Social Sciences: Declaration, Diagnosis, and Redesign](https://book.declaredesign.org)
+
+[Engeneering journal: Causal inference](https://www.sciencedirect.com/science/article/pii/S2095809919305235)
+
+## Useful resources
+### General econometrics books 
+
+[Introduction to Econometrics with R](https://www.econometrics-with-r.org/index.html)
+
+## Useful resources
+### Resource for code in empirical accounting research (work-in-progress)
+
+[Accounting Research: An Introductory Course](https://iangow.github.io/far_book/)
+
+[Data Science for Economists and Other Animals](https://grantmcdermott.com/ds4e/index.html)
+
+[Tutorial for Causal Panel Analysis](https://yiqingxu.org/tutorials/panel.html)
+
+[Tidy Finance with R](https://www.tidy-finance.org/r/)
+
+## Useful resources
+### How to get tables from R to Word
+
+[modelsummary package homepage ](https://vincentarelbundock.github.io/modelsummary/)
+
+[Creating publication-ready Word tables in R](https://dmyee.files.wordpress.com/2016/03/table_workshop.pdf)
+
+## Useful resources
+### Data viz in R
+
+[A Gentle Guide to the Grammar of Graphics with ggplot2 (slideshow)](https://pkg.garrickadenbuie.com/gentle-ggplot2/#37)
+
+[R Graphics Cookbook, 2nd edition](https://r-graphics.org/)
+
+[Data Visualization with R](https://rkabacoff.github.io/datavis/)
+
+[Check all relevant assumptions for a regression model in one go](https://easystats.github.io/performance/reference/check_model.html)

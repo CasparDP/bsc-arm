@@ -1,0 +1,310 @@
+[
+  {
+    "objectID": "Advance research methods.html#introduction-1",
+    "href": "Advance research methods.html#introduction-1",
+    "title": "Advanced research methods",
+    "section": "Introduction",
+    "text": "Introduction\nMotivation\nWhy is research exciting?\n“(…) the world is our lab, and the many diverse people in it are our subjects” (Angrist, 2015)\nWhat are accounting researchers investigating?\n\nWhat is the impact of digitalization on audit practices\nWhat are the real effects of the disclosure regulation?\nHow do firms react to tax changes?"
+  },
+  {
+    "objectID": "Advance research methods.html#introduction-2",
+    "href": "Advance research methods.html#introduction-2",
+    "title": "Advanced research methods",
+    "section": "Introduction",
+    "text": "Introduction\nGoal\n\nUncover the causal effect of an intervention\n\n\n\na.k.a. average treatment effect (ATE)"
+  },
+  {
+    "objectID": "Advance research methods.html#introduction-3",
+    "href": "Advance research methods.html#introduction-3",
+    "title": "Advanced research methods",
+    "section": "Introduction",
+    "text": "Introduction\nHow do we find the answers?\nWe use data to answer these “cause-and-effect” questions!"
+  },
+  {
+    "objectID": "Advance research methods.html#introduction-4",
+    "href": "Advance research methods.html#introduction-4",
+    "title": "Advanced research methods",
+    "section": "Introduction",
+    "text": "Introduction\nHow do we find the answers?\nWe use data to answer these “cause-and-effect” questions!"
+  },
+  {
+    "objectID": "Advance research methods.html#introduction-5",
+    "href": "Advance research methods.html#introduction-5",
+    "title": "Advanced research methods",
+    "section": "Introduction",
+    "text": "Introduction\nHow do we find the answers?\nWe use data to answer these “cause-and-effect” questions!\n\nCorrelation \\(\\neq\\) Causation \n\n\n\nCorrelation is a statistical measure that expresses the extent to which two variables are linearly related (meaning they change together at a constant rate)"
+  },
+  {
+    "objectID": "Advance research methods.html#theory-hypotheses-and-operationalisation",
+    "href": "Advance research methods.html#theory-hypotheses-and-operationalisation",
+    "title": "Advanced research methods",
+    "section": "Theory, hypotheses, and operationalisation",
+    "text": "Theory, hypotheses, and operationalisation\nTheory"
+  },
+  {
+    "objectID": "Advance research methods.html#theory-hypotheses-and-operationalisation-1",
+    "href": "Advance research methods.html#theory-hypotheses-and-operationalisation-1",
+    "title": "Advanced research methods",
+    "section": "Theory, hypotheses, and operationalisation",
+    "text": "Theory, hypotheses, and operationalisation\nTheory\n\n\nConceptual level\n\nTheory to explain the relationship\nFormulate a hypothesis\n\n\nOperational level\n\nMeasure the variables\nTest the hypothesis\n\n\n\n\nFor more about experimental research in financial accounting, check Libby et al. (2002)"
+  },
+  {
+    "objectID": "Advance research methods.html#theory-hypotheses-and-operationalisation-2",
+    "href": "Advance research methods.html#theory-hypotheses-and-operationalisation-2",
+    "title": "Advanced research methods",
+    "section": "Theory, hypotheses, and operationalisation",
+    "text": "Theory, hypotheses, and operationalisation\nWhat is a hypothesis?\n\nA hypothesis is a proposed explanation for a phenomenon or a prediction of a possible causal correlation\nIt is a tentative answer to a research question that guides the direction of study and investigation\nIts formulation is guided by existing (economic) theory\nA well-constructed hypothesis is testable, meaning it can be supported or rejected through experimentation"
+  },
+  {
+    "objectID": "Advance research methods.html#theory-hypotheses-and-operationalisation-3",
+    "href": "Advance research methods.html#theory-hypotheses-and-operationalisation-3",
+    "title": "Advanced research methods",
+    "section": "Theory, hypotheses, and operationalisation",
+    "text": "Theory, hypotheses, and operationalisation\nHow do we test a hypothesis?\n\nStepst-testVisual\n\n\n\nWe need a baseline to test against: The null hypothesis (\\(H_0\\))\nWhy null? It states that there is no effect or no difference, which serves as a baseline assumption\n\n\\(H_0\\) is what you test your \\(H_1\\) against, e.g. \\(H_0 = 0\\)\n\\(H_1\\) is the/your alternative hypothesis - what you might believe to be true\n\nA statistical test rejects \\(H_0\\) if there is enough evidence against it\n\nIf we reject \\(H_0\\), we accept \\(H_1\\)\n\n\n\n\nThe t-test measures how far the sample mean is away from \\(H_0\\)\nHypothesis:\n\nOne-sided (\\(H_0 \\leq 0\\), \\(H_1&gt;0\\)): \\(t = \\frac{X-0}{SE(X)}\\)\nTwo-sided (\\(H_0 = 0\\), \\(H_1 \\neq 0\\)): \\(t = \\frac{X_{treated}-X_{control}}{SE(X_{treated}-X_{control})}\\)"
+  },
+  {
+    "objectID": "Advance research methods.html#causal-inference",
+    "href": "Advance research methods.html#causal-inference",
+    "title": "Advanced research methods",
+    "section": "Causal inference",
+    "text": "Causal inference\nA small Becksperiment\nResearch question: Does beer affect performance?\n\n\\(H_0\\): Beer consumption does not affect performance\n\\(H_1\\): Beer consumption affects performance\n\n\n\nSometimes \\(H_1\\) is referred to as a non-directional hypothesis. This means that it does not specify the direction of the effect. Theory allows for the affect to be positive or negative."
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment",
+    "href": "Advance research methods.html#becksperiment",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nWhat is the problem?\n\nFigureResultCode\n\n\n\n\n\n\n\n\n\n\n\n\n\nSimple group comparison\n\nThe results suggest that, on average, beer drinking improves grades.\nBut is this true? Did we find the causal effect of beer drinking on grades?\n\n\n\n\nbecks_data %&gt;%\n  group_by(treatment) %&gt;%\n  summarise(across(\"performance\" , ~ mean(.x))) %&gt;%\n  mutate(beer = case_when(treatment == 1 ~ \"Beer\",\n                          treatment == 0 ~ \"No beer\"),\n           # Cosmetic change to reorder so \"Beer\" is on the left\n         beer = factor(beer, levels = c(\"Beer\", \"No beer\"))) %&gt;%\n  ggplot(aes(x = beer, y = performance, group = beer, fill = beer)) +\n  geom_col() +\n  scale_y_continuous(breaks = seq(0,10,1)) +\n  scale_fill_manual(name = \"\", values = c(\"#F7AB64\", \"#93B8D6\")) +\n  labs(x=\"\", y=\"Grade\") +\n  ggthemes::theme_hc(base_size = 18) +\n  theme(legend.position=\"\") +\n  ylim(0,10)"
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment-1",
+    "href": "Advance research methods.html#becksperiment-1",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nHow comparable are the groups, on average?\n\n\n\n\n\n\nVariable\nBeer\nNo beer\nDifference\nt-stat.\np-value\n\n\n\n\nPerformance\n8.44\n7.00\n1.43\n-10.09\n0.00\n\n\nEducation\n3.73\n2.92\n0.82\n-6.54\n0.00\n\n\nGender\n0.40\n0.40\n0.00\n-0.11\n0.91\n\n\n\n\n\n\n\n\n“Eye test” - The beer group has a higher average grade (performance) - The groups are comparable on average for gender1 but not for education\nThe gender variable is coded as 1 if the subject identifies as female, and 0 otherwise. The education variable is continuous - larger values indicate better prior education."
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment-2",
+    "href": "Advance research methods.html#becksperiment-2",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nDo other factors play a role?\n\nFigureCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot results for simple group comparison - condition on observed factors\n\nbecks_data %&gt;%\n  mutate(high_edu = case_when(education &gt; mean(becks_data$education) ~ 1,\n                              education &lt;=  mean(becks_data$education) ~ 0) %&gt;% as.character()) %&gt;%\n  group_by(treatment, high_edu) %&gt;%\n  summarise(across(\"performance\" , ~ mean(.x))) %&gt;%\n  mutate(beer = case_when(treatment == 1 ~ \"Beer\",\n                          treatment == 0 ~ \"No beer\"),\n           # Cosmetic change to reorder so \"Beer\" is on the left\n         beer = factor(beer, levels = c(\"Beer\", \"No beer\"))) %&gt;%\n  ggplot(aes(x = beer, y = performance, group = high_edu, color = high_edu)) +\n  geom_point(size = 2) +\n  geom_line(aes(group = high_edu), linetype = \"dashed\", size = 1.5 ) +\n  scale_y_continuous(breaks = seq(0,10,1)) +\n  scale_color_manual(values = c(\"0\" = \"#93B8D6\", \"1\" = \"#F7AB64\"), name = \"High education\") +\n  labs(x=\"\", y=\"Grade\") +\n  ggthemes::theme_hc(base_size = 18) +\n  theme(legend.position=\"bottom\")+\n  ylim(4,10)"
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment-3",
+    "href": "Advance research methods.html#becksperiment-3",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nDo other factors play a role?\n\nFigureCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbecks_data %&gt;%\n  group_by(treatment, gender) %&gt;%\n  mutate(gender = as.character(gender)) %&gt;%\n  summarise(across(\"performance\" , ~ mean(.x))) %&gt;%\n  mutate(beer = case_when(treatment == 1 ~ \"Beer\",\n                          treatment == 0 ~ \"No beer\"),\n           # Cosmetic change to reorder so \"Beer\" is on the left\n         beer = factor(beer, levels = c(\"Beer\", \"No beer\"))) %&gt;%\n  ggplot(aes(x = beer, y = performance, group = gender, color = gender)) +\n  geom_point(size = 2) +\n  geom_line(aes(group = gender), linetype = \"dashed\", size = 1.5) +\n  scale_y_continuous(breaks = seq(0,10,1)) +\n  scale_color_manual(values = c(\"0\" = \"#93B8D6\", \"1\" = \"#F7AB64\"), name = \"Gender\") +\n  labs(x=\"\", y=\"Grade\") +\n  ggthemes::theme_hc(base_size = 18) +\n  theme(legend.position=\"bottom\")+\n  ylim(4,10)"
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment-4",
+    "href": "Advance research methods.html#becksperiment-4",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nDo unobservable factors play a role?\n\nFigureSummary statisticsCorrelation tableCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nBeer\nNo beer\nDifference\nt-stat.\np-value\n\n\n\n\nPerformance\n8.44\n7.00\n1.43\n-10.09\n0.00\n\n\nTalent\n5.79\n3.28\n2.51\n-24.76\n0.00\n\n\nEducation\n3.73\n2.92\n0.82\n-6.54\n0.00\n\n\nGender\n0.40\n0.40\n0.00\n-0.11\n0.91\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlibrary(ggcorrplot)\n# Calculate correlations\n# I make a copy of the dataset for nicer names in the correlation plot\nbecks_data_corr &lt;- becks_data\nnames(becks_data_corr) &lt;- names(becks_data) %&gt;% str_to_sentence()\n\n# Calculate correlations\nbecks_data_corr &lt;- becks_data\nnames(becks_data_corr) &lt;- names(becks_data) %&gt;% str_to_sentence()\n\ncorr &lt;-\n  becks_data_corr %&gt;%\n  select(- Student , -Treatment_random) %&gt;%\n  cor(.) %&gt;%\n  round(.,2)\n\nggcorrplot(corr, hc.order = TRUE,type = \"upper\", lab = TRUE) +\n  xlab(\"\") + ylab(\"\") +\n  ggthemes::theme_hc(base_size = 16) +\n  theme(legend.position=\"bottom\")\n\nrm(becks_data_corr)"
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment-5",
+    "href": "Advance research methods.html#becksperiment-5",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nRandomly assigning beer drinking\n\nFigureSummary statisticsCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nBeer\nNo beer\nDifference\nt-stat.\np-value\n\n\n\n\nPerformance\n8.44\n7.00\n1.43\n0.12\n0.90\n\n\nEducation\n3.73\n2.92\n0.82\n-0.23\n0.82\n\n\nGender\n0.40\n0.40\n0.00\n0.40\n0.69\n\n\nTalent\n5.79\n3.28\n2.51\n0.63\n0.53\n\n\n\n\n\n\n\n\n\nbecks_data %&gt;%\n  group_by(treatment_random) %&gt;%\n  summarise(across(\"performance\" , ~ mean(.x))) %&gt;%\n  mutate(beer = case_when(treatment_random == 1 ~ \"Beer\",\n                          treatment_random == 0 ~ \"No beer\"),\n         # Cosmetic change to reorder so \"Beer\" is on the left\n         beer = factor(beer, levels = c(\"Beer\", \"No beer\"))) %&gt;%\n  ggplot(aes(x = beer, y = performance, group = beer, fill = beer)) +\n  geom_col() +\n  scale_y_continuous(breaks = seq(0,10,1)) +\n  scale_fill_manual(name = \"\", values = c(\"#F7AB64\", \"#93B8D6\")) +\n  labs(x=\"\", y=\"Grade\") +\n  ggthemes::theme_hc(base_size = 18) +\n  theme(legend.position=\"bottom\") +\n  ylim(0,10)"
+  },
+  {
+    "objectID": "Advance research methods.html#becksperiment-6",
+    "href": "Advance research methods.html#becksperiment-6",
+    "title": "Advanced research methods",
+    "section": "Becksperiment",
+    "text": "Becksperiment\nTakeaways\n\nRandom assignment assures that the effect is not due to selection bias\nThe difference in talent between the groups is statistically insignificant\n\nThe selection bias disappears"
+  },
+  {
+    "objectID": "Advance research methods.html#the-gold-standard-experiments",
+    "href": "Advance research methods.html#the-gold-standard-experiments",
+    "title": "Advanced research methods",
+    "section": "The gold standard: Experiments",
+    "text": "The gold standard: Experiments\nWhy is randomization so important?\n\nControlling variation in the causal variable, e.g. beer drinking\nMakes sure that the treatment and control group are similar along observable and unobservable dimensions\nThe only difference between the two groups is the treatment\nThis allows us to attribute any difference in outcomes to the treatment\nNo selection bias (endogeneity issue)\n\n\n\nAnother term for Experiments is Randomized Controlled Trials (RCTs)."
+  },
+  {
+    "objectID": "Advance research methods.html#the-gold-standard-experiments-1",
+    "href": "Advance research methods.html#the-gold-standard-experiments-1",
+    "title": "Advanced research methods",
+    "section": "The gold standard: Experiments",
+    "text": "The gold standard: Experiments\nDesigning and analyzing experiments\nTypes of experiments:\n\nField experiments\n\naim to be as similar as possible to real-world decision situations\n\nA/B testing\n\naim to evaluate different versions of the same product\n\nLab experiments\n\nare carried out in an artificial environment, usually a computer lab\n\n\n\n\nFor more in-depth information on experiments and other causal inference methods, see Békés and Kézdi (2021)."
+  },
+  {
+    "objectID": "Advance research methods.html#the-gold-standard-experiments-2",
+    "href": "Advance research methods.html#the-gold-standard-experiments-2",
+    "title": "Advanced research methods",
+    "section": "The gold standard: Experiments",
+    "text": "The gold standard: Experiments\nSetup of an experiment\n\nRandom assignment of treatment via assignment rule\nNumber of subjects? Ideally large, exact number via power analysis\n\nHow many subjects do I need to detect a certain effect size?\n\nProportion of treated subjects? Ideally 50/50\nCovariate balance\n\nDid random assignment work?"
+  },
+  {
+    "objectID": "Advance research methods.html#the-gold-standard-experiments-3",
+    "href": "Advance research methods.html#the-gold-standard-experiments-3",
+    "title": "Advanced research methods",
+    "section": "The gold standard: Experiments",
+    "text": "The gold standard: Experiments\nExternal and internal validity\n\nInternal validity\n\nExtent to which experiment identifies causal effect of treatment\n\nExternal validity\n\nExtent to which results generalize to other situations\n\n\n\n\n\n🚨💼🧠 Trade-off\n\nHigh external validity more likely achieved in real world situation\nHigh internal validity more likely achieved in controlled situation\nHow well does the result from “controlled situation” generalize to the real world?"
+  },
+  {
+    "objectID": "Advance research methods.html#experiments-in-practice",
+    "href": "Advance research methods.html#experiments-in-practice",
+    "title": "Advanced research methods",
+    "section": "Experiments in practice",
+    "text": "Experiments in practice\n\nDesign can be complicated\n\nIntention to treat versus actual treatment\n\nExperiments need careful planning\n\nResults uninformative or misleading if poorly designed\n\nAnalysis is relatively simple to do and to communicate\n\n\n\nWhen compliance is not perfect the intention to treat effect is the effect of being assigned to the treatment group, not the effect of actually receiving the treatment."
+  },
+  {
+    "objectID": "Advance research methods.html#the-gold-standard-experiments-4",
+    "href": "Advance research methods.html#the-gold-standard-experiments-4",
+    "title": "Advanced research methods",
+    "section": "The gold standard: Experiments",
+    "text": "The gold standard: Experiments\nTakeaways\n\nRandom assignment assures that effect is not due to selection bias\nIn the experiment you control…\n\nwho receives the treatment (the treatment group),…\nand who doesn’t (the control group)\n\nYou can control other aspects of the situation to avoid other confounders\nYou can measure the effect of the treatment on the outcome\nPotential trade-off between internal and external validity"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-1",
+    "href": "Advance research methods.html#difference-in-differences-1",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nWhat does it look like?\n\n\n\n\n\n\n\n\n\n\n\n🚨💼🧠 DiD only recovers the causal effect if the parallel trends assumption holds!"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-2",
+    "href": "Advance research methods.html#difference-in-differences-2",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nWhat is the idea behind DiD?\n\n\n\n\n\n\n\n\n\n\n(1) After\n(2) Before\n(1) - (2)\n\n\n\n\n(a) Treatment\nY\\(_{treated,\\ after}\\)\nY\\(_{treated,\\ before}\\)\n\\(\\Delta_{treated}\\)\n\n\n(b) Control\nY\\(_{control,\\ after}\\)\nY\\(_{control,\\ before}\\)\n\\(\\Delta_{control}\\)\n\n\n(a) - (b)\n\\(\\Delta_{after}\\)\n\\(\\Delta_{before}\\)\nDiD\n\n\n\n\n\nNotation adapted to fit the table."
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-3",
+    "href": "Advance research methods.html#difference-in-differences-3",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nA typical DiD regression looks like this\n\\[Y = \\beta_0 + \\beta_1 Treated + \\beta_2 After + \\beta_3 Treated \\times After + \\epsilon\\]\n\nThe difference-in-differences regression gives you the same estimate as if you took differences in the group averages\nIt takes also care of any unobserved constant differences between subjects and time trends!"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-4",
+    "href": "Advance research methods.html#difference-in-differences-4",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nWhat do the coefficients tell us?\n\\[Y = \\beta_0 + \\beta_1 Treated + \\beta_2 After + \\beta_3 Treated \\times After + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n(1) After\n(2) Before\n(1) - (2)\n\n\n\n\n(a) Treatment\n\\(\\beta_0 + \\beta_1+\\beta_2+\\beta_3\\)\n\\(\\beta_0 + \\beta_1\\)\n\\(\\beta_2+\\beta_3\\)\n\n\n(b) Control\n\\(\\beta_0 + \\beta_2\\)\n\\(\\beta_0\\)\n\\(\\beta_2\\)\n\n\n(a) - (b)\n\\(\\beta_1+\\beta_3\\)\n\\(\\beta_1\\)\n\\(\\beta_3\\)"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-did",
+    "href": "Advance research methods.html#difference-in-differences-did",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences (DiD)",
+    "text": "Difference-in-differences (DiD)\nDiD in action\n\n\n\n\n“High” Achievers?\nCannabis Access and Academic Performance\nby Marie and Zölitz (2017)"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-did-1",
+    "href": "Advance research methods.html#difference-in-differences-did-1",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences (DiD)",
+    "text": "Difference-in-differences (DiD)\nDiD in action\n\nIdeaSettingResult\n\n\n“In order to estimate the effect of legal cannabis access on student performance, we exploit a unique natural experiment that temporarily discriminated legal access to cannabis based on nationality. We apply a difference-in-differences approach across time and nationality groups.”\n\nSee Dunning (2012) for more on natural experiments\nLink to paper\n\n\n\n\n\n\n\n\n“drug tourists” from Belgium, Germany, Luxembourg, and France\nsubstantial part of the city’s population are students\n… about 16,000 individuals studying at Maastricht University, &gt; 50% whom are non-Dutch nationals\n\n\n\n\n\nAcademic performance of students who are no longer legally permitted to buy cannabis increases\nGrade improvements are driven by younger students\nEffects are stronger for women and low performers\nPerformance gains are larger for courses that require more numerical/mathematical skills\nPerformance gains are driven by an improved understanding not than changes in students’ study effort"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-5",
+    "href": "Advance research methods.html#difference-in-differences-5",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nEffect of policy change on student grades\n\nFigureCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Eye-test\n\ndid_data  %&gt;%\n  group_by(treatment, year)  %&gt;%\n  summarise(performance = mean(performance, rm.na = TRUE))  %&gt;%\n  mutate(type  = case_when(treatment == 1 ~ \"Treated group\",\n                           TRUE ~ \"Control group\") ) %&gt;%\n  ggplot(aes(x = year, y = performance, color = type) ) +\n  geom_point(size = 2) +\n  geom_line(size = 1) +\n  scale_color_manual(values = c( \"#93B8D6\", \"#F7AB64\"), name = \"\" ) +\n  geom_vline(xintercept = 0, linetype = \"dashed\", color = \"grey\") +\n  scale_y_continuous(breaks = seq(4, 8, .5),limits = c(5, 8) ) +\n  ggthemes::theme_hc(base_size = 18) +\n  labs( x = \"Time\", y =\"Grade\") +\n  theme(legend.position=\"bottom\")"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-6",
+    "href": "Advance research methods.html#difference-in-differences-6",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nLet’s have a look at simple averages\n\nTableCode\n\n\n\n\n\n\nTable 1: Effect of policy change on student grades\n\n\n\n\n\n\n\nAfter\nBefore\nDifference\n\n\n\n\nTreated group\n7.11\n6.02\n1.09\n\n\nControl group\n7.49\n7.51\n-0.02\n\n\nDifference\n-0.37\n-1.49\n1.11\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Effect of policy change on student grades\n\n\n# Descriptive statistics\ntable_did &lt;-\ndid_data  %&gt;%\n  group_by(treatment, after) %&gt;%\n  summarise(performance = mean(performance, rm.na = TRUE))  %&gt;%\n  spread(after, performance) %&gt;%\n  mutate(Difference = `1` - `0`) %&gt;%\n  rename(\" \" = treatment,\n         \"After\" = `1`,\n         \"Before\" = `0`) %&gt;%\n  select(\" \", \"After\", \"Before\", Difference) %&gt;%\n  mutate(\" \" = case_when(` ` == 1 ~ \"Treated group\",\n                         TRUE ~ \"Control group\") ) %&gt;%\n  arrange(Before)\n\ntable_did &lt;- table_did %&gt;% bind_rows(\n  # Add difference column\n  tibble(\n    \" \" = \"Difference\",\n    After = table_did$After[1] - table_did$After[2],\n    Before = table_did$Before[1] - table_did$Before[2],\n    Difference = After - Before))\n\ntable_did %&gt;%\n  kable(digits = 2) %&gt;%\n  kable_styling(., \"striped\", position = \"left\", font_size = 35)"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-7",
+    "href": "Advance research methods.html#difference-in-differences-7",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nLet’s check the OLS results\n\nTableCode\n\n\n\n\n\n\n\n\n\\(\\text{Treatment} \\times \\text{After}\\)\n\nshows the difference-in-differences\nthe effect is statistically significant\nfixed effects regression confirms the result\n\nCrucial assumption: Parallel trends between treatment and control in the pre-period!\n\n\n\n\n# Set Table style\n\n  # Dictionary =&gt; set only once per session\ndict &lt;- setFixest_dict( c(performance        = \"Grade\",\n                          treatment          = \"Treatment\",\n                          after              = \"After\",\n                          student            = \"Student ID\",\n                          year               = \"Year\"\n))\n\n# The style of the table\nmy_style = style.tex(tpt = TRUE,\n                     notes.tpt.intro = \"\\\\footnotesize\")\nsetFixest_etable(style.tex = my_style, markdown = TRUE)\n\n\n# Run DiD regression\na &lt;- feols(performance ~ treatment * after , data = did_data, vcov = \"hetero\" )\n\nb &lt;- feols(performance ~ treatment:after | student + year , data = did_data)\n\n# Output/Export table\n etable( a,b,\n          title    = \"Effect of policy change on student grades\",\n          digits   = 3,\n          tex      = TRUE,\n          fitstat  = ~ar2 + n,\n          replace = T,\n          style.tex = style.tex(\"aer\"),\n          highlight = .(\"rowcol, #F7AB64, se\" = \"treatment:after\"),\n          coef.just = \"l\",\n          placement = \"h!\",\n          order = c(\"!Constant\", \"^treatment:after$\", \"treatment\", \"after\"),\n          headers = list(\"OLS\" = 1, \"Fixed effects\" = 1),\n          view = T)\n  )"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-8",
+    "href": "Advance research methods.html#difference-in-differences-8",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nAverages versus DiD OLS regression\n\n\n\n\n\n\n\n\n\nEffect of policy change on student grades\n\n\n\nAfter\nBefore\nDifference\n\n\n\n\nTreated group\n7.11\n6.02\n1.09\n\n\nControl group\n7.49\n7.51\n-0.02\n\n\nDifference\n-0.37\n-1.49\n1.11"
+  },
+  {
+    "objectID": "Advance research methods.html#difference-in-differences-9",
+    "href": "Advance research methods.html#difference-in-differences-9",
+    "title": "Advanced research methods",
+    "section": "Difference-in-differences",
+    "text": "Difference-in-differences\nTreatment effect in “event-time”\n\nFigure and tableCode tableCode figure\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfeols(performance ~ i(year, treatment, -1) | student + year , data = did_data) %&gt;%\n  etable(.,\n          #title    = \"Effect of policy change on student grades\",\n          digits   = 3,\n          tex      = TRUE,\n          fitstat  = ~ar2 + n,\n          replace = T,\n          style.tex = style.tex(\"aer\"),\n          highlight = .(\"rowcol, #C9DBEA, se\" = c(\"year::-2:treatment\"),\n                        \"rowcol, #E7E8EE, se\" = c(\"year::1:treatment\",\"year::2:treatment\")),\n          coef.just = \"l\",\n          placement = \"h!\",\n          view = T\n         )\n\n\n\n\nfeols(performance ~ i(year, treatment, -1) | student + year , data = did_data) %&gt;%\nggiplot(\n    ref.line = -1,\n    main = \"\",\n    xlab = \"Time to treatment\",\n    multi_style = \"facet\",\n    geom_style = \"ribbon\",\n    col = '#F7AB64',\n    #facet_args = list(labeller = labeller(id = \\(x) gsub(\".*: \", \"\", x))),\n    theme = ggthemes::theme_hc(base_size = 18) +\n        theme(\n            text = element_text(),\n            plot.title = element_text(hjust = 0.5),\n            legend.position = \"none\"\n        )\n)"
+  },
+  {
+    "objectID": "Advance research methods.html#take-aways-1",
+    "href": "Advance research methods.html#take-aways-1",
+    "title": "Advanced research methods",
+    "section": "Take aways",
+    "text": "Take aways\nRandomized trails\n\nSimple comparisons of averages can be misleading\n\nSelection bias\n\n(controlled) Random assignment assures that the treatment and control group are similar\nControlled experiments sometimes face a trade-off between internal and external validity"
+  },
+  {
+    "objectID": "Advance research methods.html#take-aways-2",
+    "href": "Advance research methods.html#take-aways-2",
+    "title": "Advanced research methods",
+    "section": "Take aways",
+    "text": "Take aways\nDifference-in-differences (DiD)\n\nIdea: Comparing the average changes of the outcome among units in the treatment group and in the non-treatment group, before and after the intervention\nImportant: Parallel trends assumption\n\nCan’t be tested\nPre-intervention trends can give indirect evidence"
+  },
+  {
+    "objectID": "Advance research methods.html#see-you-soon",
+    "href": "Advance research methods.html#see-you-soon",
+    "title": "Advanced research methods",
+    "section": "See you soon …",
+    "text": "See you soon …\nin our Accounting MSc!"
+  },
+  {
+    "objectID": "Advance research methods.html#references",
+    "href": "Advance research methods.html#references",
+    "title": "Advanced research methods",
+    "section": "References",
+    "text": "References\nPapers and books\n\n\nAngrist, J.-S., Joshua; Pischke, 2015. Mastering ’metrics : The path from cause to effect. Princeton University Press, Oxford:\n\n\nBékés, G., Kézdi, G., 2021. Data analysis for business, economics, and policy. Cambridge University Press.\n\n\nDunning, T., 2012. Natural experiments in the social sciences: A design-based approach. Cambridge University Press.\n\n\nLibby, R., Bloomfield, R., Nelson, M.W., 2002. Experimental research in financial accounting. Accounting, organizations and society 27, 775–810.\n\n\nMarie, O., Zölitz, U., 2017. “High” achievers? Cannabis access and academic performance. The Review of Economic Studies 84, 1210–1237."
+  },
+  {
+    "objectID": "Advance research methods.html#useful-resources",
+    "href": "Advance research methods.html#useful-resources",
+    "title": "Advanced research methods",
+    "section": "Useful resources",
+    "text": "Useful resources\nWriting\nHow to review a paper (general advice)\nHow to review an accounting paper\nERIM journal list\nWriting Tips For Economics Research Papers"
+  },
+  {
+    "objectID": "Advance research methods.html#useful-resources-1",
+    "href": "Advance research methods.html#useful-resources-1",
+    "title": "Advanced research methods",
+    "section": "Useful resources",
+    "text": "Useful resources\nTextbooks about causal inference\nCausal Inference: The Mixtape\nThe effect: An introduction to research design and causality\nResearch Design in the Social Sciences: Declaration, Diagnosis, and Redesign\nEngeneering journal: Causal inference"
+  },
+  {
+    "objectID": "Advance research methods.html#useful-resources-2",
+    "href": "Advance research methods.html#useful-resources-2",
+    "title": "Advanced research methods",
+    "section": "Useful resources",
+    "text": "Useful resources\nGeneral econometrics books\nIntroduction to Econometrics with R"
+  },
+  {
+    "objectID": "Advance research methods.html#useful-resources-3",
+    "href": "Advance research methods.html#useful-resources-3",
+    "title": "Advanced research methods",
+    "section": "Useful resources",
+    "text": "Useful resources\nResource for code in empirical accounting research (work-in-progress)\nAccounting Research: An Introductory Course\nData Science for Economists and Other Animals\nTutorial for Causal Panel Analysis\nTidy Finance with R"
+  },
+  {
+    "objectID": "Advance research methods.html#useful-resources-4",
+    "href": "Advance research methods.html#useful-resources-4",
+    "title": "Advanced research methods",
+    "section": "Useful resources",
+    "text": "Useful resources\nHow to get tables from R to Word\nmodelsummary package homepage\nCreating publication-ready Word tables in R"
+  },
+  {
+    "objectID": "Advance research methods.html#useful-resources-5",
+    "href": "Advance research methods.html#useful-resources-5",
+    "title": "Advanced research methods",
+    "section": "Useful resources",
+    "text": "Useful resources\nData viz in R\nA Gentle Guide to the Grammar of Graphics with ggplot2 (slideshow)\nR Graphics Cookbook, 2nd edition\nData Visualization with R\nCheck all relevant assumptions for a regression model in one go"
+  }
+]

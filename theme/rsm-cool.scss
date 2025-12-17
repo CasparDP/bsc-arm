@@ -1,0 +1,406 @@
+/* RSM Bauhaus - Clean, minimal, functional design */
+
+/*-- scss:defaults --*/
+
+/* Import Geist fonts */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap");
+
+/* RSM Color Palette */
+$rsm-orange: #F7AB64;
+$rsm-blue: #93B8D6;
+$rsm-magenta: #D73181;
+$rsm-olive: #418b73;
+
+/* Grayscale foundation */
+$grey-900: #1a1a1a;
+$grey-800: #2d2d2d;
+$grey-700: #404040;
+$grey-600: #525252;
+$grey-400: #a3a3a3;
+$grey-300: #d4d4d4;
+$grey-200: #e5e5e5;
+$grey-100: #f5f5f5;
+$grey-50: #fafafa;
+
+/* Base colors - light theme with subtle gradients */
+$background-start: #f8f9fa;
+$background-end: #e9ecef;
+$text-color: $grey-900;
+$text-muted: $grey-600;
+$heading-color: $grey-900;
+$accent-color: $rsm-orange;
+$link-color: $rsm-magenta;
+$code-color: $rsm-olive;
+
+/* Typography */
+$font-family-sans-serif: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$font-family-monospace: "Geist Mono", "SF Mono", Monaco, monospace;
+$presentation-font-size-root: 32px;
+$presentation-heading-font: "Geist", sans-serif;
+$presentation-heading-color: $heading-color;
+$presentation-heading-font-weight: 600;
+$body-color: $text-color;
+$selection-bg: rgba(147, 184, 214, 0.3);
+
+/*-- scss:rules --*/
+
+/* Base styles - clean background gradient */
+body {
+  background: linear-gradient(135deg, $background-start 0%, $background-end 100%) !important;
+  background-attachment: fixed !important;
+}
+
+.reveal {
+  font-family: $font-family-sans-serif;
+  color: $text-color;
+  font-weight: 400;
+}
+
+/* Clean slides - no background boxes */
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  background: transparent;
+  height: 100%;
+}
+
+/* Links - simple underline on hover */
+.reveal a {
+  color: $link-color;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+  line-height: 1.6em;
+}
+
+.reveal a:hover {
+  border-bottom-color: $link-color;
+}
+
+/* Text - clean and readable */
+.reveal p {
+  font-weight: 400;
+  margin-top: 1em;
+  line-height: 1.6;
+}
+
+.reveal strong {
+  font-weight: 600;
+  color: $grey-900;
+}
+
+/* Headings - Bauhaus simplicity */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: $font-family-sans-serif;
+  color: $heading-color;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.8em;
+}
+
+.reveal h1 {
+  font-size: 2.8em;
+  font-weight: 700;
+  border-bottom: 4px solid $accent-color;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+}
+
+.reveal h2 {
+  font-size: 2em;
+  margin-top: 1.5em;
+}
+
+.reveal h3 {
+  font-size: 1.4em;
+  color: $text-muted;
+  font-weight: 500;
+  margin-top: 1.2em;
+}
+
+.reveal h4 {
+  font-size: 1.1em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $text-muted;
+}
+
+/* Callout boxes - minimal, functional */
+.reveal .callout,
+.reveal .callout-note,
+.reveal .callout-warning,
+.reveal .callout-important {
+  background: white;
+  border-left: 6px solid $rsm-magenta;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.reveal .callout-tip {
+  background: white;
+  border-left: 6px solid $rsm-olive;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Badge/tag - geometric and clean */
+.badge,
+.tag,
+.reveal .badge,
+.reveal .tag {
+  background: $rsm-orange;
+  color: white;
+  padding: 0.3em 0.8em;
+  font-size: 0.75em;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Code blocks - clean and functional */
+.reveal pre {
+  background: white;
+  border-left: 4px solid $rsm-olive;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 1.5rem 0;
+}
+
+.reveal code {
+  background: $grey-100;
+  padding: 0.2em 0.5em;
+  color: $code-color;
+  font-family: $font-family-monospace;
+  font-size: 0.9em;
+}
+
+.reveal pre code {
+  background: transparent;
+  padding: 0;
+  color: $grey-900;
+  font-size: 0.85em;
+}
+
+/* Tables - clean grid structure */
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.reveal table thead {
+  background: $grey-900;
+  border-bottom: 3px solid $accent-color;
+}
+
+.reveal table th {
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid $grey-200;
+}
+
+.reveal table tbody tr {
+  background: white;
+  transition: background 0.2s ease;
+}
+
+.reveal table tbody tr:hover {
+  background: $grey-50;
+}
+
+/* Lists - geometric markers */
+.reveal ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.reveal ul li {
+  position: relative;
+  padding-left: 1.8em;
+  margin-bottom: 0.6em;
+}
+
+.reveal ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.8em;
+  height: 0.8em;
+  background: $accent-color;
+  transform: rotate(45deg);
+}
+
+.reveal ol {
+  list-style: none;
+  counter-reset: item;
+  margin-left: 0;
+}
+
+.reveal ol li {
+  counter-increment: item;
+  position: relative;
+  padding-left: 2.5em;
+  margin-bottom: 0.6em;
+}
+
+.reveal ol li::before {
+  content: counter(item);
+  background: $grey-900;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85em;
+  width: 1.6em;
+  height: 1.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+}
+
+/* Blockquotes - minimal emphasis */
+.reveal blockquote {
+  background: white;
+  border-left: 6px solid $rsm-magenta;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  font-style: italic;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: $grey-700;
+  font-size: 1.1em;
+}
+
+.reveal blockquote p {
+  margin: 0;
+}
+
+/* Slide number - clean */
+.reveal .slide-number {
+  background: $grey-900;
+  color: white;
+  padding: 0.4em 0.8em;
+  font-family: $font-family-monospace;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+/* Progress bar - simple accent */
+.reveal .progress {
+  background: $grey-200;
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: $accent-color;
+}
+
+/* Aside/footnotes - subtle */
+.reveal aside {
+  background: $grey-50;
+  border-left: 3px solid $grey-400;
+  padding: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.75em;
+  color: $text-muted;
+}
+
+/* Panel tabs - clean functional design */
+.reveal .panel-tabset .panel-tab {
+  background: $grey-200;
+  padding: 0.6em 1.2em;
+  margin-right: 0.2em;
+  color: $grey-700;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.reveal .panel-tabset .panel-tab:hover {
+  background: $grey-300;
+  color: $grey-900;
+}
+
+.reveal .panel-tabset .panel-tab.active {
+  background: white;
+  color: $grey-900;
+  border-bottom-color: $accent-color;
+}
+
+/* Controls - minimal */
+.reveal .controls {
+  color: $grey-700;
+}
+
+.reveal .controls button:hover {
+  color: $accent-color;
+}
+
+/* Title slide - bold and simple */
+.reveal .slides section.title-slide h1 {
+  font-size: 3.5em;
+  border-bottom: 6px solid $accent-color;
+  padding-bottom: 0.4em;
+  margin-bottom: 0.5em;
+}
+
+.reveal .slides section.title-slide h2 {
+  color: $text-muted;
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
+/* Centered content boxes - clean emphasis */
+.reveal .r-fit-text {
+  background: white;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border-top: 6px solid $accent-color;
+}
+
+/* Columns - ensure proper spacing */
+.reveal .columns {
+  display: flex;
+  gap: 2rem;
+}
+
+.reveal .column {
+  flex: 1;
+}
+
+/* Images - clean presentation */
+.reveal img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer - minimal */
+.reveal .footer {
+  font-size: 0.6em;
+  color: $text-muted;
+  font-family: $font-family-monospace;
+}

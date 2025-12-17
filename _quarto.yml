@@ -2,6 +2,16 @@ project:
   type: website
   output-dir: docs
 
+# Metadata defaults for all documents
+author:
+  - name: Caspar David Peter
+    orcid: 0000-0003-0020-1673
+    email: peter@rsm.nl
+    affiliations: "Rotterdam School of Management, Accounting Department"
+
+bibliography: ["References/references.bib"]
+csl: References/journal-of-financial-economics.csl
+
 website:
   title: "Advanced Research Methods"
   site-url: https://CasparDP/bsc-arm
@@ -17,12 +27,14 @@ website:
 format:
   html:
     theme:
-      - theme/caspar_slide.scss
+      - theme/custom.scss
     css: theme/rsm.css
     toc: false
     embed-resources: false
   revealjs:
-    theme: theme/caspar_slide.scss
+    theme: theme/custom.scss
+    logo: "Pics/Rotterdam_School_of_Management,_Erasmus_University_Rotterdam_(RSM)_Logo.png"
+    footer: "Advanced research methods"
     code-tools: true
     code-overflow: wrap
     auto-stretch: true
@@ -31,3 +43,12 @@ format:
     slideNumber: true
     embed-resources: true
     echo: true
+    callout-appearance: simple
+    code-fold: false
+    citations-hover: true
+    fig-width: 7
+    fig-height: 4
+    mermaid-format: png
+    menu: false
+    slide-level: 2
+    highlight-style: a11y-dark

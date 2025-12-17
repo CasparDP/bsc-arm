@@ -91,3 +91,5 @@ env/
 
 # Keep docs/ folder for GitHub Pages
 # Note: docs/ is intentionally NOT ignored as it's needed for GitHub Pages deployment
+
+**/*.quarto_ipynb

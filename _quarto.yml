@@ -26,11 +26,10 @@ website:
 
 format:
   html:
-    theme:
-      - theme/custom.scss
+    theme: theme/custom.scss
     css: theme/rsm.css
     toc: false
-    embed-resources: false
+    embed-resources: true
   revealjs:
     theme: theme/custom.scss
     logo: "Pics/Rotterdam_School_of_Management,_Erasmus_University_Rotterdam_(RSM)_Logo.png"
@@ -51,4 +50,4 @@ format:
     mermaid-format: png
     menu: false
     slide-level: 2
-    highlight-style: a11y-dark
+    highlight-style: dracula

@@ -39,9 +39,9 @@ library(kableExtra)
 ## Introduction
 ### Goal
 
-<div style="text-align: center; display: flex; align-items: center; height: 50vh;">
-  <span style="color: #D73181; font-weight: bold; font-size: 64px;">Uncover the causal effect of an intervention</span>
-</div>
+:::{.r-fit-text}
+Uncover the causal effect of an intervention
+:::
 
 ::: aside
 a.k.a. average treatment effect (ATE)
@@ -70,13 +70,9 @@ We use data to answer these “cause-and-effect” questions!
 
 We use data to answer these “cause-and-effect” questions!
 
-
-
-<div style="text-align: center;">
- <span style="color: red; font-weight: bold; font-size: 64px;">Correlation $\neq$ Causation </span>
-</div>
-
-
+::: {.r-fit-text}
+Correlation $\neq$ Causation
+:::
 
 ::: aside
 
@@ -91,7 +87,7 @@ We use data to answer these “cause-and-effect” questions!
 ## Theory, hypotheses, and operationalisation
 ### Theory
 
-![](/Pics/excalidraw/libby_box_concep.png)
+![](/Pics/excalidraw/libby_box_concep_white.png){fig-align="center" width="80%"}
 
 
 ## Theory, hypotheses, and operationalisation
@@ -1305,7 +1301,7 @@ b <- feols(performance ~ treatment:after | student + year , data = did_data)
 
 :::
 
-## Difference-in-differences {.center}
+## Difference-in-differences
 ### Averages versus DiD OLS regression
 
 :::: {.columns}
@@ -1406,7 +1402,7 @@ ggiplot(
 ```
 :::
 
-::: {.column width="20%"}
+::: {.column width="40%"}
 
 
 ```{r echo=FALSE}

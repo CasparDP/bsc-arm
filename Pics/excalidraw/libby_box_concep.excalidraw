@@ -1,7 +1,7 @@
 {
   "type": "excalidraw",
   "version": 2,
-  "source": "https://excalidraw.com",
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
   "elements": [
     {
       "id": "esUEs5tFiXEDbE3tLBdqL",
@@ -11,7 +11,7 @@
       "width": 808.9999999999998,
       "height": 162.9434628975265,
       "angle": 0,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -25,8 +25,8 @@
       "index": "b5m",
       "roundness": null,
       "seed": 790192250,
-      "version": 309,
-      "versionNonce": 2109149094,
+      "version": 311,
+      "versionNonce": 174501863,
       "isDeleted": false,
       "boundElements": [
         {
@@ -34,7 +34,7 @@
           "id": "whz4V4ClmbMGYMWqsfgZS"
         }
       ],
-      "updated": 1741209366226,
+      "updated": 1766086469226,
       "link": null,
       "locked": false
     },
@@ -46,7 +46,7 @@
       "width": 806.3253184287713,
       "height": 164.43843703198553,
       "angle": 6.280914235502752,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -60,8 +60,8 @@
       "index": "b5n",
       "roundness": null,
       "seed": 1959477562,
-      "version": 395,
-      "versionNonce": 1267805542,
+      "version": 397,
+      "versionNonce": 1104007081,
       "isDeleted": false,
       "boundElements": [
         {
@@ -69,7 +69,7 @@
           "id": "CECtJOAMF8DOhM2v5qL7h"
         }
       ],
-      "updated": 1741209320804,
+      "updated": 1766086466684,
       "link": null,
       "locked": false
     },
@@ -81,7 +81,7 @@
       "width": 329.53048079011245,
       "height": 63.467466924625995,
       "angle": 6.280914235502752,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 1,
@@ -97,8 +97,8 @@
         "type": 3
       },
       "seed": 318966266,
-      "version": 300,
-      "versionNonce": 1057328102,
+      "version": 302,
+      "versionNonce": 1719081831,
       "isDeleted": false,
       "boundElements": [
         {
@@ -110,7 +110,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1741209320804,
+      "updated": 1766086466684,
       "link": null,
       "locked": false
     },
@@ -122,7 +122,7 @@
       "width": 313.85116912759315,
       "height": 63.4879065521471,
       "angle": 6.280914235502752,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 1,
@@ -138,8 +138,8 @@
         "type": 3
       },
       "seed": 1355004602,
-      "version": 327,
-      "versionNonce": 981727802,
+      "version": 329,
+      "versionNonce": 883421833,
       "isDeleted": false,
       "boundElements": [
         {
@@ -151,7 +151,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1741209352854,
+      "updated": 1766086466684,
       "link": null,
       "locked": false
     },
@@ -163,7 +163,7 @@
       "width": 332.31890459363956,
       "height": 62.890459363957596,
       "angle": 0,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 1,
@@ -179,8 +179,8 @@
         "type": 3
       },
       "seed": 481317754,
-      "version": 266,
-      "versionNonce": 800305978,
+      "version": 268,
+      "versionNonce": 948561417,
       "isDeleted": false,
       "boundElements": [
         {
@@ -192,7 +192,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1741209362186,
+      "updated": 1766086469226,
       "link": null,
       "locked": false
     },
@@ -204,7 +204,7 @@
       "width": 317.46728688162545,
       "height": 62.890459363957596,
       "angle": 0,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 1,
@@ -220,8 +220,8 @@
         "type": 3
       },
       "seed": 420205626,
-      "version": 266,
-      "versionNonce": 486520166,
+      "version": 268,
+      "versionNonce": 1509300999,
       "isDeleted": false,
       "boundElements": [
         {
@@ -233,7 +233,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1741209362186,
+      "updated": 1766086469226,
       "link": null,
       "locked": false
     },
@@ -245,7 +245,7 @@
       "width": 78.06512230082672,
       "height": 0.6770470928252053,
       "angle": 6.280914235502752,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -259,11 +259,11 @@
       "index": "b5s",
       "roundness": null,
       "seed": 1820951718,
-      "version": 1097,
-      "versionNonce": 1933353722,
+      "version": 1099,
+      "versionNonce": 1072502407,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209352854,
+      "updated": 1766086466684,
       "link": null,
       "locked": false,
       "points": [
@@ -299,7 +299,7 @@
       "width": 62.90838702627707,
       "height": 0.023143955718751386,
       "angle": 0,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -315,11 +315,11 @@
         "type": 2
       },
       "seed": 505028858,
-      "version": 989,
-      "versionNonce": 13632422,
+      "version": 991,
+      "versionNonce": 2085764329,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209374914,
+      "updated": 1766086469226,
       "link": null,
       "locked": false,
       "points": [
@@ -355,7 +355,7 @@
       "width": 219.65919494628906,
       "height": 35.733215547703175,
       "angle": 0,
-      "strokeColor": "#ff9e45",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -369,11 +369,11 @@
       "index": "b5u",
       "roundness": null,
       "seed": 162907770,
-      "version": 681,
-      "versionNonce": 683648442,
+      "version": 683,
+      "versionNonce": 1454055975,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209366226,
+      "updated": 1766086469226,
       "link": null,
       "locked": false,
       "text": "Conceptual level",
@@ -394,7 +394,7 @@
       "width": 229.11758422851562,
       "height": 36.06106075262841,
       "angle": 6.280914235502752,
-      "strokeColor": "#ff9e45",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -408,11 +408,11 @@
       "index": "b5v",
       "roundness": null,
       "seed": 1256908602,
-      "version": 692,
-      "versionNonce": 1360171174,
+      "version": 694,
+      "versionNonce": 1375385961,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209320804,
+      "updated": 1766086466684,
       "link": null,
       "locked": false,
       "text": "Operational level",
@@ -433,7 +433,7 @@
       "width": 265.0920715332031,
       "height": 36.06106075262841,
       "angle": 6.280914235502752,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -447,11 +447,11 @@
       "index": "b5w",
       "roundness": null,
       "seed": 306049018,
-      "version": 584,
-      "versionNonce": 1131880230,
+      "version": 586,
+      "versionNonce": 1798745511,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209320804,
+      "updated": 1766086466684,
       "link": null,
       "locked": false,
       "text": "Measure treatment",
@@ -472,7 +472,7 @@
       "width": 239.56085205078125,
       "height": 36.06106075262841,
       "angle": 6.280914235502752,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -486,11 +486,11 @@
       "index": "b5x",
       "roundness": null,
       "seed": 867295418,
-      "version": 610,
-      "versionNonce": 1672821114,
+      "version": 612,
+      "versionNonce": 185705545,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209352822,
+      "updated": 1766086466684,
       "link": null,
       "locked": false,
       "text": "Measure outcome",
@@ -511,7 +511,7 @@
       "width": 275.0028381347656,
       "height": 35.733215547703175,
       "angle": 0,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -525,11 +525,11 @@
       "index": "b5y",
       "roundness": null,
       "seed": 183089530,
-      "version": 623,
-      "versionNonce": 80926906,
+      "version": 625,
+      "versionNonce": 380417993,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209279359,
+      "updated": 1766086469226,
       "link": null,
       "locked": false,
       "text": "Cause of treatment",
@@ -550,7 +550,7 @@
       "width": 261.1383361816406,
       "height": 35.733215547703175,
       "angle": 0,
-      "strokeColor": "#ffffff",
+      "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "fillStyle": "solid",
       "strokeWidth": 2,
@@ -564,11 +564,11 @@
       "index": "b5z",
       "roundness": null,
       "seed": 120093242,
-      "version": 623,
-      "versionNonce": 149923814,
+      "version": 625,
+      "versionNonce": 24266055,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1741209279359,
+      "updated": 1766086469226,
       "link": null,
       "locked": false,
       "text": "Effect on outcome",
@@ -586,7 +586,7 @@
     "gridSize": 20,
     "gridStep": 5,
     "gridModeEnabled": false,
-    "viewBackgroundColor": "#141824"
+    "viewBackgroundColor": "#ffffff"
   },
   "files": {}
 }

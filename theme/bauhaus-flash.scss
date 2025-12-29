@@ -1,0 +1,217 @@
+/*-- scss:defaults --*/
+
+// RSM Official Palette
+$rsm-blue: #171c54;
+$rsm-red: #e30613;
+$rsm-ocher: #f7ab64;
+$rsm-black: #000000;
+$rsm-grey-3: #e7e8ee;
+$rsm-blue-5: #e9f1f7;
+
+// Bauhaus Color Palette (Mapped to RSM)
+$bauhaus-red: $rsm-red;
+$bauhaus-blue: $rsm-blue;
+$bauhaus-yellow: $rsm-ocher;
+$bauhaus-black: $rsm-black;
+$bauhaus-white: #ffffff;
+$bauhaus-cream: $rsm-grey-3;
+
+// Quarto / Reveal.js Variables
+$body-bg: $bauhaus-white;
+$body-color: $bauhaus-black;
+$link-color: $bauhaus-red;
+$selection-bg: $bauhaus-yellow;
+
+// Typography
+$font-family-sans-serif: "Archivo", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+$presentation-heading-font: "Archivo Black", "Arial Black", sans-serif;
+$presentation-font-size-root: 32px;
+
+// Heading Colors
+$h1-color: $bauhaus-black;
+$h2-color: $bauhaus-red;
+$h3-color: $bauhaus-blue;
+$h4-color: $bauhaus-black;
+
+/*-- scss:rules --*/
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap");
+
+.reveal {
+  font-family: $font-family-sans-serif;
+  background-color: $body-bg;
+
+  // Geometric Background Accents
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: $bauhaus-yellow;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    z-index: -1;
+    opacity: 0.8;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: $bauhaus-red;
+    z-index: -1;
+    opacity: 0.6;
+  }
+}
+
+// Title Slide - Asymmetric & Bold
+.reveal .title-slide {
+  text-align: left;
+  border-left: 15px solid $bauhaus-black;
+  padding-left: 40px;
+
+  .title {
+    font-family: $presentation-heading-font;
+    text-transform: uppercase;
+    font-size: 3em;
+    line-height: 0.9;
+    color: $bauhaus-black;
+    margin-bottom: 0.2em;
+    letter-spacing: -2px;
+  }
+
+  .subtitle {
+    font-family: $font-family-sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $bauhaus-red;
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    letter-spacing: 2px;
+  }
+
+  .author,
+  .institute,
+  .date {
+    font-family: $font-family-sans-serif;
+    color: $bauhaus-blue;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-top: 0.5em;
+  }
+}
+
+// Headings
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: $presentation-heading-font;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.reveal h1 {
+  border-bottom: 8px solid $bauhaus-yellow;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+}
+
+.reveal h2 {
+  border-left: 10px solid $bauhaus-blue;
+  padding-left: 20px;
+}
+
+// Lists and Text
+.reveal ul,
+.reveal ol {
+  li {
+    margin-bottom: 0.5em;
+    &::marker {
+      color: $bauhaus-red;
+      font-weight: bold;
+    }
+  }
+}
+
+// Blockquotes
+.reveal blockquote {
+  background: $bauhaus-cream;
+  border-left: 10px solid $bauhaus-red;
+  box-shadow: 10px 10px 0px $bauhaus-blue;
+  padding: 20px;
+  font-style: normal;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+// Progress Bar
+.reveal .progress {
+  height: 12px;
+  background-color: rgba($bauhaus-black, 0.1);
+  span {
+    background-color: $bauhaus-red;
+  }
+}
+
+// Controls
+.reveal .controls {
+  color: $bauhaus-blue;
+}
+
+// Tables
+.reveal table {
+  border-collapse: collapse;
+  th {
+    background-color: $bauhaus-black;
+    color: $bauhaus-white;
+    text-transform: uppercase;
+    padding: 10px;
+  }
+  td {
+    border: 2px solid $bauhaus-black;
+    padding: 10px;
+  }
+}
+
+// Callouts / Alerts
+.reveal .callout {
+  border-radius: 0;
+  border: 4px solid $bauhaus-black;
+  box-shadow: 8px 8px 0px $bauhaus-yellow;
+
+  &.callout-note {
+    border-color: $bauhaus-blue;
+  }
+  &.callout-important {
+    border-color: $bauhaus-red;
+  }
+  &.callout-tip {
+    border-color: $bauhaus-yellow;
+  }
+
+  .callout-header {
+    font-family: $presentation-heading-font;
+    text-transform: uppercase;
+    background-color: $bauhaus-black;
+    color: $bauhaus-white;
+  }
+}
+
+// Custom Grid Background for Slides
+.reveal .slides section {
+  background-image: linear-gradient(
+      rgba($bauhaus-black, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba($bauhaus-black, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}

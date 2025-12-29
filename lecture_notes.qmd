@@ -1,4 +1,9 @@
-# Talking Points for Advanced Research Methods Lecture
+---
+title: "Lecture Notes"
+format: html
+---
+
+## Talking Points for Advanced Research Methods Lecture
 
 ## Introduction (Slides 1-7)
 - Research is exciting because the world is our laboratory and people are our subjects

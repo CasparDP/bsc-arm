@@ -26,12 +26,12 @@ website:
 
 format:
   html:
-    theme: theme/custom.scss
+    theme: theme/bauhaus.scss
     css: theme/rsm.css
     toc: false
     embed-resources: true
   revealjs:
-    theme: theme/custom.scss
+    theme: theme/bauhaus.scss
     logo: "Pics/Rotterdam_School_of_Management,_Erasmus_University_Rotterdam_(RSM)_Logo.png"
     footer: "Advanced research methods"
     code-tools: true

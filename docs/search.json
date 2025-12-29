@@ -306,5 +306,54 @@
     "title": "Advanced research methods",
     "section": "Useful resources",
     "text": "Useful resources\nData viz in R\nA Gentle Guide to the Grammar of Graphics with ggplot2 (slideshow)\nR Graphics Cookbook, 2nd edition\nData Visualization with R\nCheck all relevant assumptions for a regression model in one go"
+  },
+  {
+    "objectID": "lecture_notes.html#introduction-slides-1-7",
+    "href": "lecture_notes.html#introduction-slides-1-7",
+    "title": "Lecture Notes",
+    "section": "Introduction (Slides 1-7)",
+    "text": "Introduction (Slides 1-7)\n\nResearch is exciting because the world is our laboratory and people are our subjects\nOur goal: Uncover the causal effect of an intervention (Average Treatment Effect)\nKey challenge: Correlation ≠ Causation\n\nQuestion for audience: “Can anyone give an example of two things that are correlated but not causally related?”\n\nResearch follows a systematic process: theory → hypothesis → measurement → testing"
+  },
+  {
+    "objectID": "lecture_notes.html#hypothesis-development-slides-8-14",
+    "href": "lecture_notes.html#hypothesis-development-slides-8-14",
+    "title": "Lecture Notes",
+    "section": "Hypothesis Development (Slides 8-14)",
+    "text": "Hypothesis Development (Slides 8-14)\n\nHypotheses are testable predictions derived from theory\nWe test against a null hypothesis (H₀) which states no effect exists\nStatistical significance: how far sample evidence deviates from what we’d expect under H₀\n\nQuestion for audience: “When might a statistically significant result still not be practically meaningful?”\n\nNeed to distinguish between statistical and practical significance"
+  },
+  {
+    "objectID": "lecture_notes.html#the-becksperiment-slides-15-25",
+    "href": "lecture_notes.html#the-becksperiment-slides-15-25",
+    "title": "Lecture Notes",
+    "section": "The “Becksperiment” (Slides 15-25)",
+    "text": "The “Becksperiment” (Slides 15-25)\n\nSimple group comparison showed beer drinkers performed better academically\nBut this wasn’t causal - selection bias was present\nBeer drinkers also had more talent/better education (unobservable factors)\nCorrelations between treatment and outcome don’t tell the whole story\n\nQuestion for audience: “What other variables might affect both someone’s decision to drink beer and their academic performance?”\n\nWhen we randomized treatment, the effect disappeared\n\nInteractive moment: “Before I show you the randomized results, what do you predict we’ll find?”"
+  },
+  {
+    "objectID": "lecture_notes.html#the-gold-standard-experiments-slides-26-33",
+    "href": "lecture_notes.html#the-gold-standard-experiments-slides-26-33",
+    "title": "Lecture Notes",
+    "section": "The Gold Standard: Experiments (Slides 26-33)",
+    "text": "The Gold Standard: Experiments (Slides 26-33)\n\nRandomization eliminates selection bias\nMakes groups similar on observable AND unobservable dimensions\nThe only difference becomes the treatment itself\nTypes: field experiments, A/B testing, lab experiments\n\nQuestion for audience: “What are some limitations of laboratory experiments in accounting research?”\n\nTrade-off between internal validity (accuracy) and external validity (generalizability)\n\nInteractive moment: “If you had to choose between high internal validity or high external validity for your BSc project, which would you prioritize and why?”"
+  },
+  {
+    "objectID": "lecture_notes.html#difference-in-differences-did-slides-34-42",
+    "href": "lecture_notes.html#difference-in-differences-did-slides-34-42",
+    "title": "Lecture Notes",
+    "section": "Difference-in-Differences (DiD) (Slides 34-42)",
+    "text": "Difference-in-Differences (DiD) (Slides 34-42)\n\nAlternative when randomization isn’t possible\nCompares changes in treatment vs. control groups over time\nKey assumption: parallel trends (groups would have evolved similarly without treatment)\n\nQuestion for audience: “What might violate the parallel trends assumption in a study of how IFRS adoption affects earnings quality?”\n\nCase study: Cannabis access and academic performance\n\nNatural experiment using nationality-based discrimination in access\nRestricting cannabis access improved academic performance\nInteractive moment: “How would you explain these results to someone with no statistical background?”"
+  },
+  {
+    "objectID": "lecture_notes.html#did-implementation-slides-43-48",
+    "href": "lecture_notes.html#did-implementation-slides-43-48",
+    "title": "Lecture Notes",
+    "section": "DiD Implementation (Slides 43-48)",
+    "text": "DiD Implementation (Slides 43-48)\n\nDiD mechanics: (Treatment_After - Treatment_Before) - (Control_After - Control_Before)\nCan be implemented through regression with interaction term\nEvent study graphs help visualize treatment effects over time\nPre-treatment periods help evaluate parallel trends assumption\n\nQuestion for audience: “Looking at this event study graph, how would you interpret these coefficients?”"
+  },
+  {
+    "objectID": "lecture_notes.html#takeaways-slides-49-52",
+    "href": "lecture_notes.html#takeaways-slides-49-52",
+    "title": "Lecture Notes",
+    "section": "Takeaways (Slides 49-52)",
+    "text": "Takeaways (Slides 49-52)\n\nSelection bias undermines causal inference\nRandom assignment is the gold standard but isn’t always possible\nDiD offers an alternative by controlling for time-invariant confounders\nCareful research design is crucial regardless of methodology\n\nFinal question: “What research design considerations will you apply to your BSc project?”"
   }
 ]

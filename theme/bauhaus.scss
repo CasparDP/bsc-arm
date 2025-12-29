@@ -1,0 +1,460 @@
+/*-- scss:defaults --*/
+
+// RSM Official Palette
+$rsm-blue: #171c54;
+$rsm-red: #e30613;
+$rsm-ocher: #f7ab64;
+$rsm-black: #000000;
+$rsm-grey-3: #e7e8ee;
+$rsm-blue-5: #e9f1f7;
+$rsm-blue-50: #5e95c2;
+$rsm-blue-25: #93b8d6;
+$rsm-orange: #ee7656;
+
+// Bauhaus Color Palette (Mapped to RSM)
+$bauhaus-red: $rsm-orange;
+$bauhaus-blue: $rsm-blue;
+$bauhaus-yellow: $rsm-ocher;
+$bauhaus-black: $rsm-black;
+$bauhaus-white: #ffffff;
+$bauhaus-cream: $rsm-grey-3;
+
+// Theme Tokens (shared across HTML + Reveal)
+$arm-paper: $bauhaus-white;
+$arm-ink: $bauhaus-black;
+$arm-blue: $bauhaus-blue;
+$arm-blue-2: $rsm-blue-50;
+$arm-orange: $rsm-orange;
+$arm-oker: $rsm-ocher;
+$arm-red: $arm-orange;
+$arm-yellow: $arm-oker;
+$arm-cream: $bauhaus-cream;
+$arm-grid: rgba($arm-ink, 0.055);
+$arm-hairline: rgba($arm-ink, 0.15);
+$arm-border: 4px;
+$arm-border-heavy: 10px;
+$arm-shadow-x: 10px;
+$arm-shadow-y: 10px;
+
+// Quarto / Reveal.js Variables
+$body-bg: $arm-paper;
+$body-color: $arm-ink;
+$link-color: $arm-red;
+$selection-bg: $arm-yellow;
+
+// Typography
+$font-family-sans-serif: "Archivo", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+$presentation-heading-font: "Archivo Black", "Arial Black", sans-serif;
+$presentation-font-size-root: 32px;
+
+// Heading Colors
+$h1-color: $bauhaus-black;
+$h2-color: $bauhaus-red;
+$h3-color: $bauhaus-blue;
+$h4-color: $bauhaus-black;
+
+/*-- scss:rules --*/
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap");
+
+:root {
+  --arm-paper: #{$arm-paper};
+  --arm-ink: #{$arm-ink};
+  --arm-blue: #{$arm-blue};
+  --arm-blue-2: #{$arm-blue-2};
+  --arm-orange: #{$arm-orange};
+  --arm-oker: #{$arm-oker};
+  --arm-red: #{$arm-red};
+  --arm-yellow: #{$arm-yellow};
+  --arm-cream: #{$arm-cream};
+  --arm-grid: #{$arm-grid};
+  --arm-hairline: #{$arm-hairline};
+  --arm-border: #{$arm-border};
+  --arm-border-heavy: #{$arm-border-heavy};
+  --arm-shadow-x: #{$arm-shadow-x};
+  --arm-shadow-y: #{$arm-shadow-y};
+
+  color-scheme: light;
+}
+
+::selection {
+  background: $selection-bg;
+  color: $arm-ink;
+}
+
+// Quarto HTML (non-Reveal)
+body {
+  background-color: $arm-paper;
+  color: $arm-ink;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  background-image: linear-gradient($arm-grid 1px, transparent 1px),
+    linear-gradient(90deg, $arm-grid 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-attachment: fixed;
+}
+
+// Give pages an “editorial margin” without changing layout structure.
+.page-columns,
+.page-rows-contents,
+main.content {
+  position: relative;
+}
+
+.quarto-title-block,
+#title-block-header {
+  position: relative;
+  padding-left: 1.25rem;
+  border-left: 10px solid $arm-ink;
+}
+
+.quarto-title-block::before,
+#title-block-header::before {
+  content: "";
+  position: absolute;
+  top: -0.5rem;
+  left: -$arm-border-heavy;
+  width: 5.5rem;
+  height: 5.5rem;
+  background: $arm-yellow;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $presentation-heading-font;
+  text-transform: none;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+h1 {
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  border-bottom: 4px solid $arm-oker;
+  position: relative;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: $arm-hairline;
+  margin-top: 0.35rem;
+}
+
+h2 {
+  padding-left: 0.85rem;
+  border-left: 6px solid $arm-blue;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.25rem;
+  height: 1px;
+  background: $arm-hairline;
+}
+
+a {
+  color: $arm-red;
+  text-decoration: underline;
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.16em;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+a:hover {
+  background-color: rgba($arm-oker, 0.45);
+  color: $arm-ink;
+}
+
+pre,
+code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+pre {
+  background: $arm-cream;
+  border: 2px solid rgba($arm-ink, 0.18);
+  box-shadow: 8px 8px 0px rgba($arm-blue-2, 0.35);
+}
+
+:not(pre) > code {
+  background: rgba($arm-oker, 0.28);
+  border: 1px solid rgba($arm-ink, 0.22);
+  border-radius: 0;
+  padding: 0.12em 0.34em;
+  color: $arm-ink;
+}
+
+blockquote {
+  background: $arm-cream;
+  border-left: $arm-border-heavy solid $arm-orange;
+  box-shadow: $arm-shadow-x $arm-shadow-y 0px rgba($arm-blue-2, 0.35);
+  padding: 1.1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table thead th {
+  background: $arm-ink;
+  color: $arm-paper;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+table th,
+table td {
+  border: 2px solid $arm-ink;
+  padding: 0.55rem 0.65rem;
+}
+
+.callout {
+  border-radius: 0;
+  border: $arm-border solid $arm-ink;
+  box-shadow: 8px 8px 0px $arm-yellow;
+}
+
+.callout .callout-header {
+  font-family: $presentation-heading-font;
+  text-transform: uppercase;
+  background-color: $arm-ink;
+  color: $arm-paper;
+  letter-spacing: 0.04em;
+}
+
+.callout.callout-note {
+  border-color: $arm-blue;
+}
+
+.callout.callout-important {
+  border-color: $arm-orange;
+}
+
+.callout.callout-tip {
+  border-color: $arm-yellow;
+}
+
+.reveal {
+  font-family: $font-family-sans-serif;
+  background-color: $body-bg;
+  position: relative;
+
+  // Geometric Background Accents
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: $bauhaus-yellow;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: $bauhaus-red;
+    z-index: -1;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+// Title Slide - Asymmetric & Bold
+.reveal .title-slide {
+  text-align: left;
+  border-left: 15px solid $bauhaus-black;
+  padding-left: 40px;
+
+  .title {
+    font-family: $presentation-heading-font;
+    text-transform: uppercase;
+    font-size: 3em;
+    line-height: 0.9;
+    color: $bauhaus-black;
+    margin-bottom: 0.2em;
+    letter-spacing: -2px;
+  }
+
+  .subtitle {
+    font-family: $font-family-sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $arm-orange;
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    letter-spacing: 2px;
+  }
+
+  .author,
+  .institute,
+  .date {
+    font-family: $font-family-sans-serif;
+    color: $bauhaus-blue;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-top: 0.5em;
+  }
+}
+
+// Headings
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: $presentation-heading-font;
+  text-transform: none;
+  letter-spacing: -0.6px;
+}
+
+.reveal h1 {
+  border-bottom: 5px solid $arm-oker;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+}
+
+.reveal h2 {
+  border-left: 6px solid $bauhaus-blue;
+  padding-left: 20px;
+}
+
+// Lists and Text
+.reveal ul,
+.reveal ol {
+  li {
+    margin-bottom: 0.5em;
+    &::marker {
+      color: $arm-orange;
+      font-weight: bold;
+    }
+  }
+}
+
+// Blockquotes
+.reveal blockquote {
+  background: $bauhaus-cream;
+  border-left: 10px solid $bauhaus-red;
+  box-shadow: 10px 10px 0px $bauhaus-blue;
+  padding: 20px;
+  font-style: normal;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+@keyframes arm-enter {
+  from {
+    transform: translate3d(0, 14px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.reveal .slides section.present h1,
+.reveal .slides section.present h2,
+.reveal .slides section.present .callout,
+.reveal .slides section.present blockquote {
+  animation: arm-enter 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section.present h1,
+  .reveal .slides section.present h2,
+  .reveal .slides section.present .callout,
+  .reveal .slides section.present blockquote {
+    animation: none;
+  }
+}
+
+// Progress Bar
+.reveal .progress {
+  height: 12px;
+  background-color: rgba($bauhaus-black, 0.1);
+  span {
+    background-color: $arm-orange;
+  }
+}
+
+// Controls
+.reveal .controls {
+  color: $bauhaus-blue;
+}
+
+// Tables
+.reveal table {
+  border-collapse: collapse;
+  th {
+    background-color: $bauhaus-black;
+    color: $bauhaus-white;
+    text-transform: uppercase;
+    padding: 10px;
+  }
+  td {
+    border: 2px solid $bauhaus-black;
+    padding: 10px;
+  }
+}
+
+// Callouts / Alerts
+.reveal .callout {
+  border-radius: 0;
+  border: 4px solid $bauhaus-black;
+  box-shadow: 8px 8px 0px $bauhaus-yellow;
+
+  &.callout-note {
+    border-color: $bauhaus-blue;
+  }
+  &.callout-important {
+    border-color: $bauhaus-red;
+  }
+  &.callout-tip {
+    border-color: $bauhaus-yellow;
+  }
+
+  .callout-header {
+    font-family: $presentation-heading-font;
+    text-transform: uppercase;
+    background-color: $bauhaus-black;
+    color: $bauhaus-white;
+  }
+}
+
+// Custom Grid Background for Slides
+.reveal .slides section {
+  background-image: linear-gradient(
+      rgba($bauhaus-black, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba($bauhaus-black, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
